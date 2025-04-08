@@ -20,6 +20,7 @@ class Clientes extends CI_Controller {
 	public function agregar_cliente(){
 		$data["paises"] = $this->Clientes_Model->obtenerPaises();
 		$data["estados"] = $this->Clientes_Model->obtenerEstados();
+		$data["municipios"] = $this->Clientes_Model->obtenerMunicipios();
 		$cod = "";
 		$codigo = $this->Clientes_Model->obtenerCodigo();
 		if(is_null($codigo)){
@@ -37,6 +38,8 @@ class Clientes extends CI_Controller {
 
 	public function guardar_cliente(){
 		$datos = $this->input->post();
+		$datos["nombreCliente"] = $datos["nombreCliente"]."-".$datos["apellidosCliente"];
+		unset($datos["apellidosCliente"]);
 		$resp = $this->Clientes_Model->guardarCliente($datos);
 		if ($resp){
 			$datos["pivote"] = $resp;
@@ -67,6 +70,7 @@ class Clientes extends CI_Controller {
 		$data["cliente"] = $this->Clientes_Model->obtenerCliente($id);
 		$data["paises"] = $this->Clientes_Model->obtenerPaises();
 		$data["estados"] = $this->Clientes_Model->obtenerEstados();
+		$data["municipios"] = $this->Clientes_Model->obtenerMunicipios();
 		$this->load->view('Base/header');
 		$this->load->view('Clientes/editar_cliente', $data);
 		$this->load->view('Base/footer');
@@ -75,6 +79,8 @@ class Clientes extends CI_Controller {
 
 	public function actualizar_cliente(){
 		$datos = $this->input->post();
+		$datos["nombreCliente"] = $datos["nombreCliente"]."-".$datos["apellidosCliente"];
+		unset($datos["apellidosCliente"]);
 		$return = $datos["idCliente"];
 		$resp = $this->Clientes_Model->actualizarCliente($datos);
 		if ($resp){
@@ -107,6 +113,17 @@ class Clientes extends CI_Controller {
 		if($this->input->is_ajax_request()){
 			$pais =$this->input->get("id");
 			$data = $this->Clientes_Model->obtenerEstadosXPais(trim($pais));
+			echo json_encode($data);
+		}
+		else{
+			echo "Error...";
+		}
+	}
+
+	public function obtener_municipios(){
+		if($this->input->is_ajax_request()){
+			$depto =$this->input->get("id");
+			$data = $this->Clientes_Model->obtenerMunicipiosXDepto(trim($depto));
 			echo json_encode($data);
 		}
 		else{

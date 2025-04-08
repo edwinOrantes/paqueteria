@@ -75,7 +75,7 @@
                                             <?php
                                                 foreach ($emisores as $row) {
                                             ?>
-                                            <option value="<?php echo $row->idCliente;?>"><?php echo $row->nombreCliente;?></option>
+                                            <option value="<?php echo $row->idCliente;?>"><?php echo str_replace("-", " ", $row->nombreCliente); ?></option>
                                             <?php
                                                 }
                                             ?>
@@ -91,7 +91,7 @@
                                             <?php
                                                 foreach ($receptores as $row) {
                                             ?>
-                                            <option value="<?php echo $row->idCliente;?>"><?php echo $row->nombreCliente;?></option>
+                                            <option value="<?php echo $row->idCliente;?>"><?php echo str_replace("-", " ", $row->nombreCliente); ?></option>
                                             <?php
                                                 }
                                             ?>

@@ -75,7 +75,7 @@
                                 <form class="needs-validation" method="post" action="<?= base_url(); ?>Clientes/guardar_cliente" novalidate>
                                     <div class="form-row">
 
-                                        <div class="col-xl-12 mb-6">
+                                        <div class="col-xl-6 mb-6">
                                             <label for="codigoCliente"><strong>Código</strong></label>
                                             <input type="text" class="form-control" value="<?php echo $codigo; ?>" id="" name="" readonly>
                                             <input type="hidden" class="form-control" value="<?php echo $codigo; ?>" id="codigoCliente" name="codigoCliente" required="">
@@ -89,9 +89,15 @@
                                         </div>
 
                                         <div class="col-xl-6 mb-6">
-                                            <label for="nombreCliente"><strong>Nombre completo</strong></label>
+                                            <label for="nombreCliente"><strong>Nombres</strong></label>
                                             <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" required="">
                                             <div class="invalid-tooltip">Debes agregar el nombre</div>
+                                        </div>
+
+                                        <div class="col-xl-6 mb-6">
+                                            <label for="apellidosCliente"><strong>Apellidos </strong></label>
+                                            <input type="text" class="form-control" id="apellidosCliente" name="apellidosCliente" required="">
+                                            <div class="invalid-tooltip">Debes agregar por lo menos un apellido</div>
                                         </div>
 
                                         <div class="col-xl-6 mb-6">
@@ -106,7 +112,7 @@
                                             <div class="invalid-tooltip">Debes agregar el número de teléfono</div>
                                         </div>
 
-                                        <div class="col-xl-6 mb-6">
+                                        <div class="col-xl-4 mb-6">
                                             <label for="paisCliente"><strong>Pais</strong></label>
                                             <select class="form-control select2-show-search form-select" id="paisCliente" name="paisCliente" required="">
                                                 <option selected disabled value="">.::Seleccionar::.</option>
@@ -121,7 +127,7 @@
                                             <div class="invalid-feedback">Debes seleccionar un pais</div>
                                         </div>
 
-                                        <div class="col-xl-6 mb-6">
+                                        <div class="col-xl-4 mb-6">
                                             <label for="estadoCliente"><strong>Departamento/Estado</strong></label>
                                             <select class="form-control select2-show-search form-select" id="estadoCliente" name="estadoCliente" required="">
                                                 <option selected disabled value="">.::Seleccionar::.</option>
@@ -129,6 +135,21 @@
                                                     foreach ($estados as $row) {
                                                 ?>
                                                     <option value="<?php echo $row->idEstado;?>"><?php echo $row->nombreEstado;?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                            <div class="invalid-feedback">Debes seleccionar una opcion</div>
+                                        </div>
+
+                                        <div class="col-xl-4 mb-6">
+                                            <label for="municipioCliente"><strong>Municipio</strong></label>
+                                            <select class="form-control select2-show-search form-select" id="municipioCliente" name="municipioCliente" required="">
+                                                <option selected disabled value="">.::Seleccionar::.</option>
+                                                <?php
+                                                    foreach ($municipios as $row) {
+                                                ?>
+                                                    <option value="<?php echo $row->idMunicipio;?>"><?php echo $row->nombreMunicipio;?></option>
                                                 <?php
                                                     }
                                                 ?>
@@ -149,6 +170,7 @@
                                     <div class="text-center mt-5">
                                         <input type="hidden" class="form-control" id="strPais" name="strPais" required="">
                                         <input type="hidden" class="form-control" id="strEstado" name="strEstado" required="">
+                                        <input type="hidden" class="form-control" id="strMunicipio" name="strMunicipio" required="">
                                         <button class="btn btn-primary" type="submit">Guardar datos <i class="fe fe-save"></i></button>
                                     </div>
                                         
@@ -169,6 +191,7 @@
 <script>
     $(function() {
         $("#estadoCliente").prop("disabled", true);
+        $("#municipioCliente").prop("disabled", true);
         
         // $('#telefonoCliente').mask('9999-9999');
         
@@ -213,6 +236,37 @@
         var strPais = value  +"-"+text;
         $("#strEstado").val(strPais);
 
+        $('#municipioCliente').each(function(){
+                $('#municipioCliente option').remove();
+            })
+            $.ajax({
+                url: "../obtener_municipios",
+                type: "GET",
+                data: {id:value},
+                success:function(respuesta){
+                    var registro = eval(respuesta);
+                        if (registro.length > 0)
+                        {
+                            var estado = '<option selected disabled value="">.::Seleccionar::.</option>';
+                            for (var i = 0; i < registro.length; i++) 
+                            {
+                                estado += "<option value='"+ registro[i]["idMunicipio"] +"'>"+ registro[i]["nombreMunicipio"]+"</option>";
+                            }
+                            $("#municipioCliente").append(estado);
+                        }
+                    }
+                });
+        // Obteneiendo estados
+
+        $("#municipioCliente").prop("disabled", false);
+
+    });
+
+    $(document).on("change", "#municipioCliente", function(){
+        var value = $(this).val(); // Obtiene el value seleccionado
+        var text = $("#municipioCliente option:selected").text(); // Obtiene el texto visible
+        var strMunicipio = value  +"-"+text;
+        $("#strMunicipio").val(strMunicipio);
     });
 
     $(document).on("change", "#documentoCliente", function(){

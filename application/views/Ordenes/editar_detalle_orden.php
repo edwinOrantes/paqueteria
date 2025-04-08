@@ -83,9 +83,9 @@
                                         
                                         <tr>
                                             <td class="text-black"><strong>Emisor: </strong></td>
-                                            <td><?php echo $orden->emisorOrden; ?></td>
+                                            <td><?php echo str_replace("-", " ", $orden->emisorOrden); ?></td>
                                             <td class="text-black"><strong>Receptor: </strong></td>
-                                            <td><?php echo $orden->receptorOrden; ?></td>
+                                            <td><?php echo str_replace("-", " ", $orden->receptorOrden); ?></td>
                                             <td class="text-black"><strong>Tipo pago: </strong></td>
                                             <td><span class="badge bg-info badge-sm  me-1 mb-1 mt-1"><?php echo $orden->tipoPago; ?></span></td>
                                         </tr>

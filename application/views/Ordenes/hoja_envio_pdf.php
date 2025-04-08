@@ -119,7 +119,7 @@
                 <div class="box">
                     <div class="box-header">Datos del Emisor</div>
                     <div class="box-content">
-                        <p><b>Nombre:</b> <?php echo $orden->emisorOrden; ?></p>
+                        <p><b>Nombre:</b> <?php echo str_replace("-", " ", $orden->emisorOrden); ?></p>
                         <p><b>Dirección:</b> <?php echo $orden->origenOrden; ?></p>
                         <p><b>Teléfono:</b> <?php echo $orden->telefonoEmisor; ?></p>
                     </div>
@@ -131,7 +131,7 @@
                 <div class="box">
                     <div class="box-header">Datos del Receptor</div>
                     <div class="box-content">
-                        <p><b>Nombre:</b> <?php echo $orden->receptorOrden; ?></p>
+                        <p><b>Nombre:</b> <?php echo str_replace("-", " ", $orden->receptorOrden); ?></p>
                         <p><b>Dirección:</b> <?php echo $orden->destinoOrden; ?></p>
                         <p><b>Teléfono:</b> <?php echo $orden->telefonoReceptor; ?></p>
                     </div>

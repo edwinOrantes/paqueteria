@@ -70,8 +70,8 @@
                                             ?>
                                                 <tr>
                                                     <td class="border-bottom-0 text-center"><?php echo $row->codigoOrden; ?></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->emisorOrden; ?></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->receptorOrden; ?></td>
+                                                    <td class="border-bottom-0 text-center"><?php echo str_replace("-", " ", $row->emisorOrden); ?></td>
+                                                    <td class="border-bottom-0 text-center"><?php echo str_replace("-", " ", $row->receptorOrden); ?></td>
                                                     <!-- <td class="border-bottom-0 text-center">$<?php echo number_format($row->totalPaquete, 2); ?></td> -->
                                                     <td class="border-bottom-0 text-center"><?php echo $row->estadoPago; ?></strong></td>
                                                     <td class="border-bottom-0 text-center"><?php echo $row->nombreEstado; ?></strong></td>

@@ -49,7 +49,7 @@
                                         <td class="text-black"><strong>Código : </strong></td>
                                         <td><?php echo $cliente->codigoCliente; ?></td>
                                         <td class="text-black"><strong>Nombre: </strong></td>
-                                        <td><?php echo $cliente->nombreCliente; ?></td>
+                                        <td><?php echo str_replace("-", " ", $cliente->nombreCliente); ?></td>
                                     </tr>
                                     
                                     <tr>

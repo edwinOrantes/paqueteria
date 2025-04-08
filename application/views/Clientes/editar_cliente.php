@@ -44,11 +44,16 @@
                             <div class="card-header">
                                 <h3 class="card-title uppercase"><label for=""><strong>DATOS DEL CLIENTE</strong></label></h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body"> 
+
+                                <?php
+                                    $arrayNombre = explode("-", $cliente->nombreCliente);
+                                ?>
+
                                 <form class="needs-validation" method="post" action="<?= base_url(); ?>Clientes/actualizar_cliente" novalidate>
                                     <div class="form-row">
 
-                                        <div class="col-xl-12 mb-6">
+                                        <div class="col-xl-6 mb-6">
                                             <label for="codigoCliente"><strong>Código</strong></label>
                                             <input type="text" class="form-control" value="<?php echo $cliente->codigoCliente; ?>" id="" name="" readonly>
                                             <div class="invalid-tooltip"></div>
@@ -61,9 +66,15 @@
                                         </div>
 
                                         <div class="col-xl-6 mb-6">
-                                            <label for="nombreCliente"><strong>Nombre completo</strong></label>
-                                            <input type="text" class="form-control" value="<?php echo $cliente->nombreCliente; ?>" id="nombreCliente" name="nombreCliente" required="">
+                                            <label for="nombreCliente"><strong>Nombres</strong></label>
+                                            <input type="text" class="form-control" value="<?php echo $arrayNombre[0]; ?>" id="nombreCliente" name="nombreCliente" required="">
                                             <div class="invalid-tooltip">Debes agregar el nombre</div>
+                                        </div>
+
+                                        <div class="col-xl-6 mb-6">
+                                            <label for="apellidosCliente"><strong>Apellidos </strong></label>
+                                            <input type="text" class="form-control" value="<?php echo (count($arrayNombre) >= 1) ? $arrayNombre[1] : ""; ?>" id="apellidosCliente" name="apellidosCliente" required="">
+                                            <div class="invalid-tooltip">Debes agregar por lo menos un apellido</div>
                                         </div>
 
                                         <div class="col-xl-6 mb-6">
@@ -78,7 +89,7 @@
                                             <div class="invalid-tooltip">Debes agregar el número de teléfono</div>
                                         </div>
 
-                                        <div class="col-xl-6 mb-6">
+                                        <div class="col-xl-4 mb-6">
                                             <label for="paisCliente"><strong>País</strong></label>
                                             <select class="form-control select2-show-search form-select" id="paisCliente" name="paisCliente" required="">
                                                 <option selected disabled value="">.::Seleccionar::.</option>
@@ -96,7 +107,7 @@
                                         </div>
 
 
-                                        <div class="col-xl-6 mb-6">
+                                        <div class="col-xl-4 mb-6">
                                             <label for="estadoCliente"><strong>Departamento/Estado</strong></label>
                                             <select class="form-control select2-show-search form-select" id="estadoCliente" name="estadoCliente" required="">
                                                 <option selected disabled value="">.::Seleccionar::.</option>
@@ -114,6 +125,24 @@
                                         </div>
 
 
+                                        <div class="col-xl-4 mb-6">
+                                            <label for="municipioCliente"><strong>Municipio</strong></label>
+                                            <select class="form-control select2-show-search form-select" id="municipioCliente" name="municipioCliente" required="">
+                                                <option selected disabled value="">.::Seleccionar::.</option>
+                                                <?php
+                                                    foreach ($municipios as $row) {
+                                                        // Verifica si el estado del cliente coincide con la opción
+                                                        $selected = ($cliente->municipioCliente == $row->idMunicipio) ? 'selected' : '';
+                                                ?>
+                                                    <option value="<?php echo $row->idMunicipio;?>" <?php echo $selected; ?> ><?php echo $row->nombreMunicipio;?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                            <div class="invalid-feedback">Debes seleccionar una opcion</div>
+                                        </div>
+
+
 
                                         <div class="col-xl-12 mb-6">
                                             <label for="direccionCliente"><strong>Dirección</strong></label>
@@ -127,6 +156,7 @@
                                     <div class="text-center mt-5">
                                         <input type="hidden" class="form-control" value="<?php echo $cliente->strPais; ?>" id="strPais" name="strPais" required="">
                                         <input type="hidden" class="form-control" value="<?php echo $cliente->strEstado; ?>" id="strEstado" name="strEstado" required="">
+                                        <input type="hidden" class="form-control" value="<?php echo $cliente->strMunicipio; ?>" id="strMunicipio" name="strMunicipio" required="">
                                         <input type="hidden" class="form-control" value="<?php echo $cliente->idCliente; ?>" id="idCliente" name="idCliente" required="">
                                         <button class="btn btn-primary" type="submit">Actualizar datos <i class="fe fe-save"></i></button>
                                     </div>
@@ -183,7 +213,39 @@
         var text = $("#estadoCliente option:selected").text(); // Obtiene el texto visible
         var strPais = value  +"-"+text;
         $("#strEstado").val(strPais);
+        $("#strMunicipio").val("");
 
+        $('#municipioCliente').each(function(){
+                $('#municipioCliente option').remove();
+            })
+            $.ajax({
+                url: "../../obtener_municipios",
+                type: "GET",
+                data: {id:value},
+                success:function(respuesta){
+                    var registro = eval(respuesta);
+                        if (registro.length > 0)
+                        {
+                            var estado = '<option selected disabled value="">.::Seleccionar::.</option>';
+                            for (var i = 0; i < registro.length; i++) 
+                            {
+                                estado += "<option value='"+ registro[i]["idMunicipio"] +"'>"+ registro[i]["nombreMunicipio"]+"</option>";
+                            }
+                            $("#municipioCliente").append(estado);
+                        }
+                    }
+                });
+        // Obteneiendo estados
+
+        $("#municipioCliente").prop("disabled", false);
+
+    });
+
+    $(document).on("change", "#municipioCliente", function(){
+        var value = $(this).val(); // Obtiene el value seleccionado
+        var text = $("#municipioCliente option:selected").text(); // Obtiene el texto visible
+        var strMunicipio = value  +"-"+text;
+        $("#strMunicipio").val(strMunicipio);
     });
 
 

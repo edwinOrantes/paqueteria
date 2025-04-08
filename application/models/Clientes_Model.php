@@ -18,8 +18,8 @@ class Clientes_Model extends CI_Model
     public function guardarCliente($data = null){
         if($data != null){
             $sql = "INSERT INTO tbl_emisores(codigoCliente, documentoCliente, nombreCliente, telefonoCliente, correoCliente, 
-                                            paisCliente, distritoCliente, direccionCliente, strPais, strEstado)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                            paisCliente, distritoCliente, municipioCliente, direccionCliente, strPais, strEstado, strMunicipio)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if($this->db->query($sql, $data)){
                 $cliente = $this->db->insert_id(); // Id de la transaccion
                 return $cliente;
@@ -34,8 +34,8 @@ class Clientes_Model extends CI_Model
     public function guardarReceptor($data = null){
         if($data != null){
             $sql = "INSERT INTO tbl_receptores(codigoCliente, documentoCliente, nombreCliente, telefonoCliente, correoCliente, 
-                                            paisCliente, distritoCliente, direccionCliente, strPais, strEstado, pivoteEmisor)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                            paisCliente, distritoCliente, municipioCliente, direccionCliente, strPais, strEstado, strMunicipio, pivoteEmisor)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if($this->db->query($sql, $data)){
                 return true;
             }else{
@@ -55,10 +55,12 @@ class Clientes_Model extends CI_Model
     public function actualizarCliente($data = null){
         if($data != null){
             $sql = "UPDATE tbl_emisores SET documentoCliente = ?, nombreCliente = ?, telefonoCliente = ?, correoCliente = ?, 
-                                            paisCliente = ?, distritoCliente = ?, direccionCliente = ?, strPais = ?, strEstado = ?
+                                            paisCliente = ?, distritoCliente = ?, municipioCliente = ?, direccionCliente = ?, strPais = ?, strEstado = ?,
+                                            strMunicipio = ?
                     WHERE idCliente = ?";
             $sql2 = "UPDATE tbl_receptores SET documentoCliente = ?, nombreCliente = ?, telefonoCliente = ?, correoCliente = ?, 
-                                            paisCliente = ?, distritoCliente = ?, direccionCliente = ?, strPais = ?, strEstado = ?
+                                            paisCliente = ?, distritoCliente = ?, municipioCliente = ?,  direccionCliente = ?, strPais = ?, strEstado = ?,
+                                            strMunicipio = ?
                     WHERE pivoteEmisor = ?";
             if($this->db->query($sql, $data)){
                 $this->db->query($sql2, $data);
@@ -109,8 +111,20 @@ class Clientes_Model extends CI_Model
         return $datos->result();
     }
 
+    public function obtenerMunicipios(){
+        $sql = "SELECT * FROM tbl_municipios_condados";
+        $datos = $this->db->query($sql);
+        return $datos->result();
+    }
+
     public function obtenerEstadosXPais($pais = null){
         $sql = "SELECT * FROM tbl_estados AS e WHERE e.idPais = '$pais' ";
+        $datos = $this->db->query($sql);
+        return $datos->result();
+    }
+
+    public function obtenerMunicipiosXDepto($depto = null){
+        $sql = "SELECT * FROM tbl_municipios_condados AS mc WHERE mc.idDepartamento = '$depto' ";
         $datos = $this->db->query($sql);
         return $datos->result();
     }

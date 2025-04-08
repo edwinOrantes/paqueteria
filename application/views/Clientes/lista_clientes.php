@@ -47,7 +47,7 @@
                                                     if($row->estadoCliente == 1){                                            ?>
                                                     <tr>
                                                         <td class="text-center"><?= $index;?></td>
-                                                        <td class="text-center"><?= $row->nombreCliente;?></td>
+                                                        <td class="text-center"><?= str_replace("-", " ", $row->nombreCliente); ?></td>
                                                         <td class="text-center"><?= $row->telefonoCliente;?></td>
                                                         <td class="text-center"><?= $row->documentoCliente;?></td>
                                                         <td class="text-center"><?= $row->direccionCliente;?></td>
