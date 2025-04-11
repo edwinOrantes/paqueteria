@@ -35,6 +35,15 @@ class Envios_Model extends CI_Model
        }
     }
 
+    public function listaEnvios(){
+       $sql = "SELECT emp.nombreEmpleado, emp.telefonoEmpleado, d.nombreDestino, e.* FROM tbl_envios AS e
+                INNER JOIN tbl_empleados AS emp ON e.gestorEnvio = emp.idEmpleado
+                INNER JOIN tbl_destinos AS d ON d.idDestino = e.destinoOrden
+                ORDER BY e.idEnvio DESC";
+        $datos = $this->db->query($sql);
+        return $datos->result();
+    }
+
     public function detalleEnvio($envio = null){
         if($envio != null){
             $sql = "SELECT emp.nombreEmpleado, d.nombreDestino, e.* FROM tbl_envios AS e
@@ -44,7 +53,41 @@ class Envios_Model extends CI_Model
             $datos = $this->db->query($sql);
             return $datos->row();
         }
-    } 
+    }
+
+    public function detalleEnvioAgrupado($idEnvio = null) {
+        if($idEnvio != null){
+            $sql = "SELECT 
+                    e.idEnvio, e.codigoEnvio, e.gestorEnvio, e.fechaEnvio, m.idMaleta, m.codigoMaleta, 
+                    m.tipoMaleta, mo.idOrdenMaleta, mo.codigoOrdenMaleta, mo.strDetalle
+                    FROM tbl_envios e
+                    JOIN  tbl_maletas m ON e.idEnvio = m.idEnvio
+                    JOIN  tbl_maleta_ordenes mo ON m.idMaleta = mo.idMaleta
+                    WHERE e.idEnvio = ? ";
+            $resultado = $this->db->query($sql, $idEnvio)->result();
+        
+            $agrupado = [];
+        
+            foreach ($resultado as $fila) {
+                $idMaleta = $fila->idMaleta;
+        
+                if (!isset($agrupado[$idMaleta])) {
+                    $agrupado[$idMaleta] = [
+                        'codigoMaleta' => $fila->codigoMaleta,
+                        'tipoMaleta' => $fila->tipoMaleta,
+                        'ordenes' => []
+                    ];
+                }
+        
+                $agrupado[$idMaleta]['ordenes'][] = [
+                    'codigoOrdenMaleta' => $fila->codigoOrdenMaleta,
+                    'strDetalle' => $fila->strDetalle
+                ];
+            }
+        
+            return $agrupado;
+        }
+    }
 
     public function detalleOrden($codigo = null){
         if($codigo != null){

@@ -23,11 +23,11 @@ class Empleado extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		/* date_default_timezone_set('America/El_Salvador');
+		date_default_timezone_set('America/El_Salvador');
 		if (!$this->session->has_userdata('valido')){
 			$this->session->set_flashdata("error", "Debes iniciar sesión");
 			redirect(base_url());
-		} */
+		}
 		$this->load->model("Empleado_Model");
 	}
 

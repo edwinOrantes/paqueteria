@@ -48442,7 +48442,7 @@ table.table-bordered.dataTable thead tr:first-child td {
 }
 
 .wrap-login100 {
-    /*width: 960px;*/
+    width: 500px;
     background: #fff;
     overflow: hidden;
     flex-wrap: wrap;

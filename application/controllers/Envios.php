@@ -10,10 +10,10 @@ class Envios extends CI_Controller {
         $this->load->model("Empleado_Model");
         $this->load->model("Envios_Model");
         $this->load->model("Ordenes_Model");
-		/* if (!$this->session->has_userdata('valido')){
+		if (!$this->session->has_userdata('valido')){
 			$this->session->set_flashdata("error", "Debes iniciar sesión");
 			redirect(base_url());
-		} */
+		}
 	}
 
     public function index(){
@@ -61,6 +61,29 @@ class Envios extends CI_Controller {
 		// echo json_encode($datos);
 
 	}
+
+	public function lista_envios(){
+
+		$data["envios"] = $this->Envios_Model->listaEnvios();
+
+		$this->load->view('Base/header');
+		$this->load->view('Envios/lista_envios', $data);
+		$this->load->view('Base/footer');
+
+		// echo json_encode($data);
+	}
+
+	public function ver_detalle_envio($envio = null){
+
+		$data["envios"] = $this->Envios_Model->detalleEnvioAgrupado($envio);
+
+		$this->load->view('Base/header');
+		$this->load->view('Envios/detalle_maletas_envio', $data);
+		$this->load->view('Base/footer');
+
+		// echo json_encode($data["envios"]);
+	}
+
 
 	public function detalle_envio($envio = null){
 		// $envio = unserialize(base64_decode(urldecode($envio)));

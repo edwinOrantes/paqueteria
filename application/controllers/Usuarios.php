@@ -8,10 +8,10 @@ class Usuarios extends CI_Controller {
 		parent::__construct();
 		date_default_timezone_set('America/El_Salvador');
         $this->load->model("Usuarios_Model");
-		/* if (!$this->session->has_userdata('valido')){
+		if (!$this->session->has_userdata('valido')){
 			$this->session->set_flashdata("error", "Debes iniciar sesión");
 			redirect(base_url());
-		} */
+		}
 	}
 
 	public function index(){
@@ -59,6 +59,12 @@ class Usuarios extends CI_Controller {
         
     }
 
+		
+	public function cerrar_sesion(){
+		$this->session->sess_destroy();
+		redirect(base_url());
+	}
+
     public function eliminar_usuario(){
         $datos = $this->input->post();
         $bool = $this->Usuarios_Model->eliminarUsuario($datos);
@@ -100,11 +106,7 @@ class Usuarios extends CI_Controller {
 
 			
 	} */
-	
-	public function cerrarSesion(){
-		$this->session->sess_destroy();
-		redirect(base_url());
-	}
+
 
 	public function dashboard(){
 		$i = "";

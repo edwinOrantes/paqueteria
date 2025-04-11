@@ -57,19 +57,19 @@
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="fechaEnvioOrden">Fecha envio</label>
+                                        <label for="fechaEnvioOrden"><strong>Fecha envio</strong></label>
                                         <input type="date" class="form-control" value="<?php echo date("Y-m-d") ?>" id="fechaEnvioOrden" name="fechaEnvioOrden" required>
                                         <div class="invalid-tooltip">Este campo es obligatorio</div>
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="fechaLLegadaOrden">Fecha llegada</label>
+                                        <label for="fechaLLegadaOrden"><strong>Fecha llegada</strong></label>
                                         <input type="date" class="form-control" value="<?php echo date("Y-m-d") ?>" id="fechaLLegadaOrden" name="fechaLLegadaOrden" required>
                                         <div class="invalid-tooltip">Este campo es obligatorio</div>
                                     </div>
 
                                     <div class="col-xl-6 mb-6" id="emisor">
-                                        <label for="emisorOrden">Emisor</label>
+                                        <label for="emisorOrden"><strong>Emisor</strong></label>
                                         <select class="form-control form-control select2-show-search form-select" id="emisorOrden" name="emisorOrden" required>
                                             <option value="">.:: Seleccionar ::.</option>
                                             <?php
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="receptorOrden">Receptor</label>
+                                        <label for="receptorOrden"><strong>Receptor</strong></label>
                                         <select class="form-control form-control select2-show-search form-select" id="receptorOrden" name="receptorOrden" required>
                                             <option value="">.:: Seleccionar ::.</option>
                                             <?php
@@ -101,7 +101,7 @@
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="tipoPago">Tipo pago</label>
+                                        <label for="tipoPago"><strong>Tipo pago</strong></label>
                                         <select class="form-control" id="tipoPago" name="tipoPago" required>
                                             <option value="">.:: Seleccionar ::.</option>
                                             <option value="Efectivo">Efectivo</option>
@@ -112,7 +112,7 @@
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="estadoPago">Estado pago</label>
+                                        <label for="estadoPago"><strong>Estado pago</strong></label>
                                         <select class="form-control" id="estadoPago" name="estadoPago" required>
                                             <option value="">.:: Seleccionar ::.</option>
                                             <option value="Pagado">Pagado</option>
@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="tipoServicio">Tipo servicio</label>
+                                        <label for="tipoServicio"><strong>Tipo servicio</strong></label>
                                         <select class="form-control" id="tipoServicio" name="tipoServicio" required>
                                             <option value="">.:: Seleccionar ::.</option>
                                             <option value="Entrega">Entrega</option>
@@ -133,9 +133,11 @@
                                     </div>
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="otraDireccion">Cambiar dirección de entrega </label>
-                                        <input type="text" class="form-control" placeholder="Si la entrega se hara en una direccion distinta" id="otraDireccion" name="otraDireccion">
-                                        <div class="invalid-tooltip">Este campo es obligatorio</div>
+                                        <div class="text-danger" id="dvdAbono">
+                                            <label for="abonoOrden"><strong>Abono</strong></label>
+                                            <input type="text" class="form-control text-danger" value="0" placeholder="Monto de dinero abonado" id="abonoOrden" name="abonoOrden">
+                                            <div class="invalid-tooltip">Este campo es obligatorio</div>
+                                        </div>
                                     </div>
 
                                     <!-- <div class="col-xl-6 mb-6">
@@ -153,7 +155,7 @@
                                     </div> -->
 
                                     <div class="col-xl-6 mb-6">
-                                        <label for="destinoOrden">Bodega destino</label>
+                                        <label for="destinoOrden"><strong>Bodega destino</strong></label>
                                         <select class="form-control" id="destinoOrden" name="destinoOrden" required>
                                             <option value="">.:: Seleccionar ::.</option>
                                             <?php
@@ -169,7 +171,7 @@
                                     </div>
 
                                     <div class="col-xl-12 mb-6">
-                                        <label for="otraDireccion">Observaciones</label>
+                                        <label for="otraDireccion"><strong>Observaciones</strong></label>
                                         <textarea name="observacionesOrden" id="observacionesOrden" class="form-control" rows="5"></textarea>
                                         <div class="invalid-tooltip">Este campo es obligatorio</div>
                                     </div>
@@ -196,6 +198,15 @@
 
 <script>
     $(document).ready(function() {
-        // $(".buscador").select2();
+        $("#dvdAbono").hide();
+    });
+
+    $(document).on("change", "#estadoPago", function(){
+        var tipo = $(this).val();
+        if(tipo=== "Por pagar"){
+            $("#dvdAbono").show();
+        }else{
+            $("#dvdAbono").hide();
+        }
     });
 </script>

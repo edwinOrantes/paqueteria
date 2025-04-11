@@ -6,6 +6,11 @@ class Ordenes extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		date_default_timezone_set('America/El_Salvador');
+		date_default_timezone_set('America/El_Salvador');
+		if (!$this->session->has_userdata('valido')){
+			$this->session->set_flashdata("error", "Debes iniciar sesión");
+			redirect(base_url());
+		}
 		$this->load->model("Ordenes_Model");
 		$this->load->model("Clientes_Model");
 		$this->load->model("Empresa_Model");
@@ -345,20 +350,24 @@ class Ordenes extends CI_Controller {
 		$piezas = 0;
 		$index = 1;
 		$cantidadPartesArray = json_decode($cantidaPartes, true);
-	
-		// Contamos las piezas
-		foreach ($cantidadPartesArray as $paquete) {
-			if ($paquete['detalle'] == '') {
-				$piezas = 1;  // Si el detalle está vacío, se cuenta como 1 pieza
-			} else {
-				$piezas++;  // Si tiene detalle, se incrementa
+		
+		if(count($cantidadPartesArray) > 0){
+			// Contamos las piezas
+			foreach ($cantidadPartesArray as $paquete) {
+				if ($paquete['detalle'] == '') {
+					$piezas = 1;  // Si el detalle está vacío, se cuenta como 1 pieza
+				} else {
+					$piezas++;  // Si tiene detalle, se incrementa
+				}
+				$index++;
 			}
-			$index++;
+			$data["piezas"] = $piezas;
+			$data["qrs"] = $this->crear_qr($cantidadPartesArray, $codigoBase, $piezas);
+		}else{
+			$data["piezas"] = 1;
+			$data["qrs"] = $this->crear_qr(1, $codigoBase, 1);
 		}
-		$data["piezas"] = $piezas;
-		$data["qrs"] = $this->crear_qr($cantidadPartesArray, $codigoBase, $piezas);
 
-	
 		// echo json_encode($data);
 
 		// Creando PDF 

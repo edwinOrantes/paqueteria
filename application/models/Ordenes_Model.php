@@ -17,7 +17,7 @@ class Ordenes_Model extends CI_Model
 
     public function obtenerOrdenes(){
         $sql = "SELECT
-                o.idOrden, o.codigoOrden, o.creoQR, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden, r.nombreCliente as receptorOrden, o.fechaEnvio, o.fechaLlegada,
+                o.idOrden, o.codigoOrden, o.creoQR, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden, r.nombreCliente as receptorOrden, o.fechaEnvio, o.fechaLlegada,
                 o.tipoServicio, r.direccionCliente AS destinoOrden, r.strPais, r.strEstado, o.tipoPago, o.estadoPago, o.estadoPago, o.otraDireccionOrden, o.estadoOrden, eo.nombreEstado
                 FROM tbl_ordenes AS o
                 INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente)
@@ -28,7 +28,7 @@ class Ordenes_Model extends CI_Model
     }
 
     public function obtenerOrden($id = null){
-        $sql = "SELECT o.idOrden, o.codigoOrden, o.creoQR, o.tipoServicio, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden,
+        $sql = "SELECT o.idOrden, o.codigoOrden, o.creoQR, o.tipoServicio, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden,
                 r.nombreCliente as receptorOrden, o.fechaEnvio, o.fechaLlegada, r.strPais, r.strEstado, r.direccionCliente AS destinoOrden, o.tipoPago, o.estadoPago,
                 o.estadoPago, o.otraDireccionOrden, o.estadoOrden, o.gestorOrden, eo.nombreEstado, em.telefonoCliente AS telefonoEmisor,
                 r.telefonoCliente AS telefonoReceptor FROM tbl_ordenes AS o
@@ -53,7 +53,7 @@ class Ordenes_Model extends CI_Model
     public function guardarOrden($data = null){
         if($data != null){
             $sql = "INSERT INTO tbl_ordenes(codigoOrden, fechaEnvio, fechaLlegada, emisorOrden, receptorOrden, tipoPago, 
-                                estadoPago, tipoServicio, otraDireccionOrden, destinoOrden, observacionesOrden)
+                                estadoPago, tipoServicio, abonoOrden, destinoOrden, observacionesOrden)
                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if($this->db->query($sql, $data)){
                 $orden = $this->db->insert_id(); // Id de la transaccion

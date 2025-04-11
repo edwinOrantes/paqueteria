@@ -8,10 +8,10 @@ class Empresa extends CI_Controller {
 		parent::__construct();
 		date_default_timezone_set('America/El_Salvador');
         $this->load->model("Empresa_Model");
-		/* if (!$this->session->has_userdata('valido')){
+		if (!$this->session->has_userdata('valido')){
 			$this->session->set_flashdata("error", "Debes iniciar sesión");
 			redirect(base_url());
-		} */
+		}
 	}
 
 	public function index(){

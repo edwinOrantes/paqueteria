@@ -174,15 +174,12 @@
                               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                  <div class="drop-heading">
                                     <div class="text-center">
-                                       <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
-                                       <small class="text-muted">Senior Admin</small>
+                                       <h5 class="text-dark mb-0 fs-14 fw-semibold"><?php echo $this->session->userdata('empleado_h'); ?></h5>
+                                       <small class="text-muted"><?php echo $this->session->userdata('usuario_h'); ?></small>
                                     </div>
                                  </div>
                                  <div class="dropdown-divider m-0"></div>
-                                 <a class="dropdown-item" href="lockscreen.html">
-                                    <i class="dropdown-icon fe fe-lock"></i> Bloquear
-                                 </a>
-                                 <a class="dropdown-item" href="login.html">
+                                 <a class="dropdown-item" href="<?php echo base_url(); ?>Usuarios/cerrar_sesion">
                                     <i class="dropdown-icon fe fe-alert-circle"></i> Salir
                                  </a>
                               </div>
@@ -259,6 +256,15 @@
                         <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/">Agregar empleado</a> </li>
                         <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/lista_empleados">Lista empleados</a> </li>
                         <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/cargos_empleados">Cargos</a> </li>
+                     </ul>
+                  </li>
+
+                  <li class="slide">
+                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span
+                        class="side-menu__label">Gastos</span><i class="angle fe fe-chevron-right"></i></a>
+                     <ul class="slide-menu">
+                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Gastos/">Cuentas</a> </li>
+                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Gastos/control_gastos">Control de gastos</a> </li>
                      </ul>
                   </li>
 

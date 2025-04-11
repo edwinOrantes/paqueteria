@@ -201,6 +201,20 @@
                                 <td colspan="5" style="text-align: right"><strong>TOTAL</strong></td>
                                 <td><strong>$ <?php echo number_format($totalEnvio, 2); ?></strong> </td>
                             </tr>
+
+                            <?php
+                                if($orden->abonoOrden > 0){
+                                    echo '<tr style="">
+                                            <td colspan="5" style="text-align: right"><strong>ABONADO</strong></td>
+                                            <td><strong>$ '.number_format($orden->abonoOrden, 2).'</strong> </td>
+                                        </tr>';
+                                    echo '<tr style="">
+                                            <td colspan="5" style="text-align: right"><strong>PENDIENTE</strong></td>
+                                            <td><strong>$ '.number_format(($totalEnvio - $orden->abonoOrden), 2).'</strong> </td>
+                                        </tr>';
+                                }
+                            ?>
+
                         </tbody>
                     </table>
                 </div>
