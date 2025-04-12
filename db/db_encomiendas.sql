@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `tbl_accesos` (
   PRIMARY KEY (`idAcceso`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_accesos: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_accesos: ~0 rows (aproximadamente)
 INSERT INTO `tbl_accesos` (`idAcceso`, `nombreAcceso`, `descripcionAcceso`, `estadoAcceso`, `fechaAcceso`) VALUES
 	(1, 'Administrador', 'Acceso total al sistema.', 1, '2025-04-11 17:29:43');
 
@@ -388,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `tbl_municipios_condados` (
   `nombreMunicipio` text NOT NULL,
   `idDepartamento` int(11) NOT NULL,
   PRIMARY KEY (`idMunicipio`)
-) ENGINE=InnoDB AUTO_INCREMENT=263 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- Volcando datos para la tabla db_caminata.tbl_municipios_condados: ~262 rows (aproximadamente)
 INSERT INTO `tbl_municipios_condados` (`idMunicipio`, `nombreMunicipio`, `idDepartamento`) VALUES
@@ -653,7 +653,13 @@ INSERT INTO `tbl_municipios_condados` (`idMunicipio`, `nombreMunicipio`, `idDepa
 	(259, 'Santo Domingo', 10),
 	(260, 'Tecoluca', 10),
 	(261, 'Tepetitán', 10),
-	(262, 'Verapaz', 10);
+	(262, 'Verapaz', 10),
+	(263, 'Houston', 57),
+	(264, 'Irving', 57),
+	(265, 'Dallas', 57),
+	(266, 'San Francisco', 19),
+	(267, 'Los Angeles', 19),
+	(268, 'Pittsburg', 52);
 
 -- Volcando estructura para tabla db_caminata.tbl_ordenes
 CREATE TABLE IF NOT EXISTS `tbl_ordenes` (
