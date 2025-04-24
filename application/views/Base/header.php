@@ -268,6 +268,16 @@
                      </ul>
                   </li>
 
+                  <li class="slide">
+                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span
+                        class="side-menu__label">Reportes</span><i class="angle fe fe-chevron-right"></i></a>
+                     <ul class="slide-menu">
+                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/lista_clientes">Clientes</a> </li>
+                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/ordenes_por_fecha">Ordenes por fecha</a> </li>
+                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/ordenes_por_ruta">Ordenes por rutas</a> </li>
+                     </ul>
+                  </li>
+
 
                   <li class="slide">
                      <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fa fa-cog"></i><span

@@ -18,7 +18,7 @@ class Ordenes_Model extends CI_Model
     public function obtenerOrdenes(){
         $sql = "SELECT
                 o.idOrden, o.codigoOrden, o.creoQR, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden, r.nombreCliente as receptorOrden, o.fechaEnvio, o.fechaLlegada,
-                o.tipoServicio, r.direccionCliente AS destinoOrden, r.strPais, r.strEstado, o.tipoPago, o.estadoPago, o.estadoPago, o.otraDireccionOrden, o.estadoOrden, eo.nombreEstado
+                o.empacadaPor, o.tipoServicio, r.direccionCliente AS destinoOrden, r.strPais, r.strEstado, o.tipoPago, o.estadoPago, o.estadoPago, o.otraDireccionOrden, o.estadoOrden, eo.nombreEstado
                 FROM tbl_ordenes AS o
                 INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente)
                 INNER JOIN tbl_receptores AS r ON(o.receptorOrden = r.idCliente)
@@ -28,12 +28,17 @@ class Ordenes_Model extends CI_Model
     }
 
     public function obtenerOrden($id = null){
-        $sql = "SELECT o.idOrden, o.codigoOrden, o.creoQR, o.tipoServicio, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden,
-                r.nombreCliente as receptorOrden, o.fechaEnvio, o.fechaLlegada, r.strPais, r.strEstado, r.direccionCliente AS destinoOrden, o.tipoPago, o.estadoPago,
-                o.estadoPago, o.otraDireccionOrden, o.estadoOrden, o.gestorOrden, eo.nombreEstado, em.telefonoCliente AS telefonoEmisor,
-                r.telefonoCliente AS telefonoReceptor FROM tbl_ordenes AS o
-                INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente) INNER JOIN tbl_receptores AS r ON(o.receptorOrden = r.idCliente)
-                INNER JOIN tbl_estado_orden AS eo ON(o.estadoOrden = eo.idEstado) WHERE o.idOrden = '$id' ";
+        $sql = "SELECT o.idOrden, o.codigoOrden, o.creoQR, o.tipoServicio, o.abonoOrden, o.empacadaPor, em.nombreCliente AS emisorOrden,
+                em.strPais AS emPais, em.strEstado AS emEstado, em.direccionCliente AS origenOrden, em.strMunicipio AS emMunicipio,
+                r.strPais AS rPais, r.strEstado AS rEstado,r.nombreCliente as receptorOrden, r.strMunicipio AS rMunicipio,
+                o.fechaEnvio, o.fechaLlegada, r.strPais, r.strEstado,
+                r.direccionCliente AS destinoOrden, o.tipoPago, o.estadoPago, o.estadoPago, o.otraDireccionOrden, o.estadoOrden, o.gestorOrden,
+                eo.nombreEstado, em.telefonoCliente AS telefonoEmisor, r.telefonoCliente AS telefonoReceptor 
+                FROM tbl_ordenes AS o
+                INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente)
+                INNER JOIN tbl_receptores AS r ON(o.receptorOrden = r.idCliente)
+                INNER JOIN tbl_estado_orden AS eo ON(o.estadoOrden = eo.idEstado)
+                WHERE o.idOrden = '$id' ";
         $datos = $this->db->query($sql);
         return $datos->row();
     }
@@ -53,8 +58,8 @@ class Ordenes_Model extends CI_Model
     public function guardarOrden($data = null){
         if($data != null){
             $sql = "INSERT INTO tbl_ordenes(codigoOrden, fechaEnvio, fechaLlegada, emisorOrden, receptorOrden, tipoPago, 
-                                estadoPago, tipoServicio, abonoOrden, destinoOrden, observacionesOrden)
-                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                estadoPago, tipoServicio, abonoOrden, destinoOrden, observacionesOrden, empacadaPor)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if($this->db->query($sql, $data)){
                 $orden = $this->db->insert_id(); // Id de la transaccion
                 return $orden;

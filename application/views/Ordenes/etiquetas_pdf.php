@@ -40,6 +40,24 @@
     </style>
 </head>
 
+<?php
+    function formatearDireccion($pais, $estado, $municipio) {
+        // Quitar el número y guion si existen
+        $pais = preg_replace('/^\d+\-/', '', trim($pais));
+        $estado = preg_replace('/^\d+\-/', '', trim($estado));
+        $municipio = preg_replace('/^\d+\-/', '', trim($municipio));
+
+        // Crear un arreglo con los valores no vacíos
+        $partes = array_filter([$municipio, $estado, $pais], function($valor) {
+            return !empty($valor);
+        });
+
+        // Unir con coma y espacio
+        return implode(', ', $partes);
+    }
+?>
+
+
 <body>
 
     <div class="container">
@@ -63,15 +81,25 @@
 
             <div class="row_contenido">
                 <div class="columna_header" style="width: 48%">
-                    <p style="font-size: 8px; text-align: center"><strong>Emisor</strong></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->emisorOrden); ?></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Dirección:</strong> <?php echo $orden->origenOrden; ?></p>
+                    <p style="font-size: 7px; text-align: center"><strong>Emisor</strong></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->emisorOrden); ?></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left">
+                        <strong>Dirección:</strong>
+                        <?php 
+                            echo $orden->origenOrden.", ".formatearDireccion($orden->emPais, $orden->emEstado, $orden->emMunicipio);
+                        ?>
+                    </p>
                     <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Teléfono:</strong> <?php echo $orden->telefonoEmisor; ?></p>
                 </div>
                 <div class="columna_header" style="width: 48%;">
-                    <p style="font-size: 8px; text-align: center"><strong>Receptor</strong></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->receptorOrden); ?></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Dirección:</strong> <?php echo $orden->destinoOrden; ?></p>
+                    <p style="font-size: 7px; text-align: center"><strong>Receptor</strong></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->receptorOrden); ?></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left">
+                    <strong>Dirección:</strong>
+                        <?php 
+                            echo $orden->origenOrden.", ".formatearDireccion($orden->rPais, $orden->rEstado, $orden->rMunicipio);
+                        ?>
+                    </p>
                     <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Teléfono:</strong> <?php echo $orden->telefonoReceptor; ?></p>
                 </div>
             </div>
@@ -129,16 +157,26 @@
 
             <div class="row_contenido">
                 <div class="columna_header" style="width: 48%">
-                    <p style="font-size: 8px; text-align: center"><strong>Emisor</strong></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->emisorOrden); ?></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Dirección:</strong> <?php echo $orden->origenOrden; ?></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Teléfono:</strong> <?php echo $orden->telefonoEmisor; ?></p>
+                    <p style="font-size: 7px; text-align: center"><strong>Emisor</strong></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->emisorOrden); ?></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left">
+                        <strong>Dirección:</strong> 
+                        <?php 
+                            echo $orden->origenOrden.", ".formatearDireccion($orden->emPais, $orden->emEstado, $orden->emMunicipio);
+                        ?>
+                    </p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left"><strong>Teléfono:</strong> <?php echo $orden->telefonoEmisor; ?></p>
                 </div>
                 <div class="columna_header" style="width: 48%;">
-                    <p style="font-size: 8px; text-align: center"><strong>Receptor</strong></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->receptorOrden); ?></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Dirección:</strong> <?php echo $orden->destinoOrden; ?></p>
-                    <p style="font-size: 8px; padding-top: -5px; text-align: left"><strong>Teléfono:</strong> <?php echo $orden->telefonoReceptor; ?></p>
+                    <p style="font-size: 7px; text-align: center"><strong>Receptor</strong></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left"><strong>Nombre:</strong> <?php echo str_replace("-", " ", $orden->receptorOrden); ?></p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left">
+                        <strong>Dirección:</strong>
+                        <?php 
+                            echo $orden->destinoOrden.", ".formatearDireccion($orden->rPais, $orden->rEstado, $orden->rMunicipio);
+                        ?>
+                    </p>
+                    <p style="font-size: 7px; padding-top: -5px; text-align: left"><strong>Teléfono:</strong> <?php echo $orden->telefonoReceptor; ?></p>
                 </div>
             </div>
 

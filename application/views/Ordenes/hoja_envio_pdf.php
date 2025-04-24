@@ -10,6 +10,7 @@
             font-size: 12px;
             margin: 0;
             padding: 0;
+            text-transform: uppercase
         }
 
         .container {
@@ -94,6 +95,25 @@
         }
     </style>
 </head>
+
+<?php
+    function formatearDireccion($pais, $estado, $municipio) {
+        // Quitar el número y guion si existen
+        $pais = preg_replace('/^\d+\-/', '', trim($pais));
+        $estado = preg_replace('/^\d+\-/', '', trim($estado));
+        $municipio = preg_replace('/^\d+\-/', '', trim($municipio));
+
+        // Crear un arreglo con los valores no vacíos
+        $partes = array_filter([$municipio, $estado, $pais], function($valor) {
+            return !empty($valor);
+        });
+
+        // Unir con coma y espacio
+        return implode(', ', $partes);
+    }
+?>
+
+
 <body>
     <div class="container">
         <!-- Primera fila: Imagen y 4 líneas de texto -->
@@ -109,18 +129,23 @@
                 <p class="" style="font-size: 14px; font-weight: bold; padding-top: -10px; text-align: center">Orden #<?php echo $orden->codigoOrden; ?></p>
                 
             </div>
-            <hr style="color: #01369b ">
+            <!-- <hr style="color: #01369b "> -->
         </div>
-
+        
         <!-- Fila con datos del Emisor y Receptor a la par -->
-        <div class="row clearfix">
+        
+        <div class="row clearfix" style="padding-top: -25px">
             <!-- Emisor -->
             <div class="column">
                 <div class="box">
                     <div class="box-header">Datos del Emisor</div>
                     <div class="box-content">
                         <p><b>Nombre:</b> <?php echo str_replace("-", " ", $orden->emisorOrden); ?></p>
-                        <p><b>Dirección:</b> <?php echo $orden->origenOrden; ?></p>
+                        <p><b>Dirección:</b> 
+                            <?php 
+                             echo $orden->origenOrden.", ".formatearDireccion($orden->emPais, $orden->emEstado, $orden->emMunicipio);
+                            ?>
+                        </p>
                         <p><b>Teléfono:</b> <?php echo $orden->telefonoEmisor; ?></p>
                     </div>
                 </div>
@@ -132,7 +157,11 @@
                     <div class="box-header">Datos del Receptor</div>
                     <div class="box-content">
                         <p><b>Nombre:</b> <?php echo str_replace("-", " ", $orden->receptorOrden); ?></p>
-                        <p><b>Dirección:</b> <?php echo $orden->destinoOrden; ?></p>
+                        <p><b>Dirección:</b> 
+                            <?php 
+                             echo $orden->destinoOrden.", ".formatearDireccion($orden->rPais, $orden->rEstado, $orden->rMunicipio);
+                            ?>
+                        </p>
                         <p><b>Teléfono:</b> <?php echo $orden->telefonoReceptor; ?></p>
                     </div>
                 </div>
@@ -140,8 +169,8 @@
         </div>
 
         <!-- Tabla de detalles -->
-            <div class="box">
-                <div class="box-header">Detalle de Productos</div>
+            <div class="box" style="padding-top: -250px">
+                <div class="box-header">Detalle de productos, <strong>empacados por: </strong><?php echo $orden->empacadaPor; ?></div>
                 <div class="box-content">
                     <table class="table">
                         <thead>

@@ -66,6 +66,7 @@ class Ordenes extends CI_Controller {
 			$uc = $ultimoCodigo->codigo + 1;
 			$datos["codigoOrden"] = "$uc";
 		}
+		$datos["creadaPor"] = $this->session->userdata('empleado_h');
 		
 		$resp = $this->Ordenes_Model->guardarOrden($datos);
 		if ($resp){
@@ -76,7 +77,7 @@ class Ordenes extends CI_Controller {
 			redirect(base_url()."Ordenes/agregar_orden/");
 		}
 
-		//echo json_encode($datos);
+		// echo json_encode($datos);
 		
 	}
 	

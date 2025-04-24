@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.28-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.27-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.5.0.6677
+-- HeidiSQL Versión:             12.4.0.6659
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `tbl_accesos` (
   PRIMARY KEY (`idAcceso`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_accesos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_accesos: ~1 rows (aproximadamente)
 INSERT INTO `tbl_accesos` (`idAcceso`, `nombreAcceso`, `descripcionAcceso`, `estadoAcceso`, `fechaAcceso`) VALUES
 	(1, 'Administrador', 'Acceso total al sistema.', 1, '2025-04-11 17:29:43');
 
@@ -67,17 +67,20 @@ CREATE TABLE IF NOT EXISTS `tbl_destinos` (
   `nombreDestino` varchar(50) NOT NULL,
   `creadoDestino` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idDestino`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_destinos: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_destinos: ~10 rows (aproximadamente)
 INSERT INTO `tbl_destinos` (`idDestino`, `nombreDestino`, `creadoDestino`) VALUES
 	(1, 'Usulután', '2023-03-20 23:05:55'),
-	(2, 'Los Angeles', '2023-03-20 23:05:55'),
+	(2, 'Virginia', '2023-03-20 23:05:55'),
 	(3, 'Washington', '2023-05-13 22:15:25'),
-	(4, 'Virginia', '2025-03-26 22:14:49'),
-	(5, 'Maryland', '2025-03-26 22:15:29'),
-	(6, 'Pittsburg', '2025-03-26 22:15:34'),
-	(7, 'San Francisco', '2025-03-26 22:15:46');
+	(4, 'Maryland', '2025-03-26 22:14:49'),
+	(5, 'Pittsburg', '2025-03-26 22:15:29'),
+	(6, 'Los Angeles', '2025-03-26 22:15:34'),
+	(7, 'San Francisco', '2025-03-26 22:15:46'),
+	(8, 'Houston', '2025-04-17 19:38:19'),
+	(9, 'Irving', '2025-04-17 19:38:26'),
+	(10, 'Dallas', '2025-04-17 19:38:34');
 
 -- Volcando estructura para tabla db_caminata.tbl_detalle_orden
 CREATE TABLE IF NOT EXISTS `tbl_detalle_orden` (
@@ -94,15 +97,17 @@ CREATE TABLE IF NOT EXISTS `tbl_detalle_orden` (
   `eliminadoArticulo` int(11) NOT NULL DEFAULT 1,
   `creadoArticulo` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idDetalle`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_detalle_orden: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_detalle_orden: ~7 rows (aproximadamente)
 INSERT INTO `tbl_detalle_orden` (`idDetalle`, `idOrden`, `contenidoPaquete`, `pesoPaquete`, `precioLibra`, `declaradoPaquete`, `totalPaquete`, `adicionalesPaquete`, `ordenPaquete`, `qrArticulo`, `eliminadoArticulo`, `creadoArticulo`) VALUES
 	(14, 7, 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS 1/5\r\nMEDICINA 2/5\r\nROPA 1LBS 3/5\r\nCAFE DE EL SALVADOR 2LBS 4/5\r\nDISPOSITIVOS ELECTRONICOS 5/5', 10.00, 8.00, 0.00, 80.00, '[{"concepto":"MEDICINA A","monto":"4.6"},{"concepto":"MEDICINA B","monto":"3.99"},{"concepto":"MEDICINA C","monto":"6.30"}]', '[{"concepto":"CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS","detalle":"1\\/5","paquete":1},{"concepto":"MEDICINA","detalle":"2\\/5","paquete":2},{"concepto":"ROPA 1LBS","detalle":"3\\/5","paquete":3},{"concepto":"CAFE DE EL SALVADOR 2LBS","detalle":"4\\/5","paquete":4},{"concepto":"DISPOSITIVOS ELECTRONICOS","detalle":"5\\/5","paquete":5}]', '', 1, '2025-03-27 17:36:52'),
 	(15, 8, 'JUGUETES\r\nROPA\r\nJOYAS', 8.60, 8.00, 0.00, 68.80, '', '[{"concepto":"JUGUETES","detalle":"","paquete":1},{"concepto":"ROPA","detalle":"","paquete":2},{"concepto":"JOYAS","detalle":"","paquete":3}]', '', 1, '2025-03-31 21:08:20'),
 	(16, 9, 'ROPA 1/3\r\nAUDIFONOS JBL 2/3\r\nJUGUETES  3/3', 9.00, 8.00, 0.00, 72.00, '', '[{"concepto":"ROPA","detalle":"1\\/3","paquete":1},{"concepto":"AUDIFONOS JBL","detalle":"2\\/3","paquete":2},{"concepto":"JUGUETES ","detalle":"3\\/3","paquete":3}]', '', 1, '2025-04-03 20:12:22'),
 	(17, 10, 'ROPA 1/6\r\nMEDICINAS 2/6\r\nJUGUETES 3/6\r\nDOCUMENTOS LEGALES 4/6\r\nPOLLO CAMPERO 5/6\r\nZAPATOS MARCA ADIDAD 6/6', 20.00, 8.00, 0.00, 160.00, '[{"concepto":"ACETAMINOFEN","monto":"5"},{"concepto":"DOGENAL","monto":"25"},{"concepto":"VIROGRIP","monto":"12"}]', '[{"concepto":"ROPA","detalle":"1\\/6","paquete":1},{"concepto":"MEDICINAS","detalle":"2\\/6","paquete":2},{"concepto":"JUGUETES","detalle":"3\\/6","paquete":3},{"concepto":"DOCUMENTOS LEGALES","detalle":"4\\/6","paquete":4},{"concepto":"POLLO CAMPERO","detalle":"5\\/6","paquete":5},{"concepto":"ZAPATOS MARCA ADIDAD","detalle":"6\\/6","paquete":6}]', '', 1, '2025-04-03 20:17:36'),
-	(18, 11, 'ROPA Y JOYAS ', 3.00, 8.00, 0.00, 24.00, '', '[]', '', 1, '2025-04-09 21:22:31');
+	(18, 11, 'ROPA Y JOYAS ', 3.00, 8.00, 0.00, 24.00, '', '[]', '', 1, '2025-04-09 21:22:31'),
+	(19, 12, 'POLLO CAMPERO 1/2\r\nJUGUETES 2/2', 6.00, 8.00, 0.00, 48.00, '', '[{"concepto":"POLLO CAMPERO","detalle":"1\\/2","paquete":1},{"concepto":"JUGUETES","detalle":"2\\/2","paquete":2}]', '', 1, '2025-04-17 19:42:11'),
+	(20, 13, 'JOYAS ', 2.00, 8.00, 0.00, 16.00, '', '[]', '', 1, '2025-04-17 19:48:10');
 
 -- Volcando estructura para tabla db_caminata.tbl_emisores
 CREATE TABLE IF NOT EXISTS `tbl_emisores` (
@@ -124,17 +129,17 @@ CREATE TABLE IF NOT EXISTS `tbl_emisores` (
   PRIMARY KEY (`idCliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_emisores: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_emisores: ~10 rows (aproximadamente)
 INSERT INTO `tbl_emisores` (`idCliente`, `codigoCliente`, `nombreCliente`, `documentoCliente`, `telefonoCliente`, `correoCliente`, `paisCliente`, `distritoCliente`, `municipioCliente`, `direccionCliente`, `strPais`, `strEstado`, `strMunicipio`, `estadoCliente`, `creadoCliente`) VALUES
-	(1, 1000, 'Juan Antonio-Campos Sanchez', '47856946', '78956236', '-', 1, 13, 67, 'Barrio el Calvario, Usulutan', '1- El Salvador', '13- San Miguel ', '67-Chinameca', 1, '2023-03-20 23:08:03'),
-	(2, 1001, 'Flor de Maria-Fuentes Saravia', '56987456', '78956321', '', 0, 0, 0, 'Santa Maria, Usulutan', '', '', '', 0, '2023-03-20 23:08:40'),
+	(1, 1000, 'Juan Antonio-Campos Sanchez', '47856946', '78956236', '-', 1, 13, 67, 'Barrio el Calvario', '1- El Salvador', '13- San Miguel ', '67-Chinameca', 1, '2023-03-20 23:08:03'),
+	(2, 1001, 'Flor de Maria-Fuentes Saravia', '56987456', '78956321', '-', 1, 1, 2, 'Barrio el calvario', '1- El Salvador', '1-Ahuachapán', '2-Jujutla', 1, '2023-03-20 23:08:40'),
 	(3, 1002, 'Carmen del Cid-Medrano', '05123698', '74569812', '-', 1, 3, 0, 'El centro, Usulutan', '1- El Salvador', '3-Sonsonate', '', 1, '2023-03-21 04:04:33'),
-	(4, 1003, 'Marcos Antonio-Carcamo', '102653489', '23659685', '-', 2, 19, 0, 'El Transito', '2- Estados Unidos', '19-California', '', 1, '2025-03-22 16:52:49'),
+	(4, 1003, 'Marcos Antonio-Carcamo', '102653489', '23659685', '-', 2, 52, 268, '123 Main Street', '2- Estados Unidos', '52- Pensilvania ', '268-Pittsburg', 1, '2025-03-22 16:52:49'),
 	(5, 1004, '', '', '', '', 0, 0, 0, '', '', '', '', 0, '2025-03-26 16:52:57'),
 	(6, 1005, '', '', '', '', 0, 0, 0, '', '', '', '', 0, '2025-03-26 16:55:21'),
-	(7, 1006, 'Francisco Adalberto-Campos', '123456', '26359874', 'example@example.com', 1, 11, 0, 'Santa Maria', '1-El Salvador', '11-Usulután', '', 1, '2025-03-26 19:47:06'),
+	(7, 1006, 'Francisco Adalberto-Campos', '123456', '26359874', 'example@example.com', 1, 11, 61, 'Colonia La Pradera', '1-El Salvador', '11-Usulután', '61-Santa María', 1, '2025-03-26 19:47:06'),
 	(8, 1007, 'Marcos Antonio-Maldonado', '987456321', '23659874', 'example@example.com', 1, 12, 0, 'Colonia La Pradera', '1-El Salvador', '12-San Miguel', '', 1, '2025-03-26 22:08:06'),
-	(9, 1008, 'Felipe Alonso-Campos', '456321', '6398-5698', 'example@example.com', 2, 61, 0, 'Por ahi', '2- Estados Unidos', '61-Washington', '', 1, '2025-03-27 14:43:05'),
+	(9, 1008, 'Felipe Alonso-Campos', '456321', '6398-5698', 'example@example.com', 2, 57, 264, '1200  HOLLY HILL DR GRAND PRAIRIE', '2- Estados Unidos', '57- Texas ', '264-Irving', 1, '2025-03-27 14:43:05'),
 	(10, 1009, 'Juan Adalberto-Valdez Parada', '963265987', '7546-8956', '-', 1, 11, 51, 'Barrio la parroquia', '1-El Salvador', '11-Usulután', '51-Jucuarán', 1, '2025-04-08 17:20:18');
 
 -- Volcando estructura para tabla db_caminata.tbl_empleados
@@ -171,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `tbl_empresa` (
   PRIMARY KEY (`idEmpresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_empresa: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_empresa: ~1 rows (aproximadamente)
 INSERT INTO `tbl_empresa` (`idEmpresa`, `nombreEmpresa`, `telefonoEmpresa`, `correoEmpresa`, `direccionEmpresa`, `logoEmpresa`, `creadaEmpresa`) VALUES
 	(1, 'GENCIA DE VIAJES CAMPOS', '+1 (703) 731-7202, 6001-4277', 'agenciadeencomiendascampos@gmail.com', '4TA CALLE ORIENTE #53 USULUTAN, FRENTE A AGROSERVICIO SAN JOSE', 'logo_empresa', '2025-04-02 20:24:43');
 
@@ -184,12 +189,14 @@ CREATE TABLE IF NOT EXISTS `tbl_envios` (
   `destinoOrden` int(11) NOT NULL,
   `agregadoEnvio` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idEnvio`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_envios: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_envios: ~4 rows (aproximadamente)
 INSERT INTO `tbl_envios` (`idEnvio`, `codigoEnvio`, `gestorEnvio`, `fechaEnvio`, `destinoOrden`, `agregadoEnvio`) VALUES
 	(1, 1000, 3, '2025-04-10', 3, '2025-04-04 15:49:17'),
-	(2, 1001, 4, '2025-04-10', 3, '2025-04-04 15:51:48');
+	(2, 1001, 4, '2025-04-10', 3, '2025-04-04 15:51:48'),
+	(3, 1002, 4, '2025-04-22', 3, '2025-04-14 19:34:33'),
+	(4, 1003, 4, '2025-04-22', 4, '2025-04-14 20:03:47');
 
 -- Volcando estructura para tabla db_caminata.tbl_estados
 CREATE TABLE IF NOT EXISTS `tbl_estados` (
@@ -315,15 +322,19 @@ CREATE TABLE IF NOT EXISTS `tbl_maletas` (
   `tipoMaleta` int(11) NOT NULL DEFAULT 1,
   `creada` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idMaleta`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_maletas: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_maletas: ~9 rows (aproximadamente)
 INSERT INTO `tbl_maletas` (`idMaleta`, `idEnvio`, `codigoMaleta`, `tipoMaleta`, `creada`) VALUES
 	(1, 2, 1743786037, 1, '2025-04-04 17:00:37'),
 	(2, 2, 1743786061, 2, '2025-04-04 17:01:01'),
 	(3, 2, 1743786093, 1, '2025-04-04 17:01:33'),
 	(4, 2, 1743786422, 1, '2025-04-04 17:07:02'),
-	(5, 2, 1743788047, 1, '2025-04-04 17:34:07');
+	(5, 2, 1743788047, 1, '2025-04-04 17:34:07'),
+	(6, 3, 1744659283, 1, '2025-04-14 19:34:43'),
+	(7, 3, 1744659284, 1, '2025-04-14 19:34:44'),
+	(8, 4, 1744661033, 1, '2025-04-14 20:03:53'),
+	(9, 4, 1744661034, 1, '2025-04-14 20:03:54');
 
 -- Volcando estructura para tabla db_caminata.tbl_maleta_ordenes
 CREATE TABLE IF NOT EXISTS `tbl_maleta_ordenes` (
@@ -334,9 +345,9 @@ CREATE TABLE IF NOT EXISTS `tbl_maleta_ordenes` (
   `strDetalle` text NOT NULL,
   `creadoOrdenMaleta` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idOrdenMaleta`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_maleta_ordenes: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_maleta_ordenes: ~10 rows (aproximadamente)
 INSERT INTO `tbl_maleta_ordenes` (`idOrdenMaleta`, `idOrden`, `idMaleta`, `codigoOrdenMaleta`, `strDetalle`, `creadoOrdenMaleta`) VALUES
 	(6, 7, 1, '1000-1', 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS', '2025-04-04 21:46:33'),
 	(7, 7, 1, '1000-2', 'MEDICINA', '2025-04-04 21:46:37'),
@@ -344,7 +355,10 @@ INSERT INTO `tbl_maleta_ordenes` (`idOrdenMaleta`, `idOrden`, `idMaleta`, `codig
 	(9, 7, 1, '1000-3', 'ROPA 1LBS', '2025-04-04 21:47:14'),
 	(10, 7, 1, '1000-4', 'CAFE DE EL SALVADOR 2LBS', '2025-04-04 21:47:30'),
 	(11, 7, 2, '1000-5', 'DISPOSITIVOS ELECTRONICOS', '2025-04-04 21:54:12'),
-	(12, 11, 2, '1004', 'ROPA Y JOYAS ', '2025-04-09 21:31:58');
+	(12, 11, 2, '1004', 'ROPA Y JOYAS ', '2025-04-09 21:31:58'),
+	(13, 7, 6, '1000-1', 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS', '2025-04-14 19:35:17'),
+	(14, 7, 6, '1000-3', 'ROPA 1LBS', '2025-04-14 19:36:22'),
+	(15, 8, 8, '1001-1', 'JUGUETES ROPA JOYAS', '2025-04-14 20:04:19');
 
 -- Volcando estructura para tabla db_caminata.tbl_menu
 CREATE TABLE IF NOT EXISTS `tbl_menu` (
@@ -390,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `tbl_municipios_condados` (
   PRIMARY KEY (`idMunicipio`)
 ) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_municipios_condados: ~262 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_municipios_condados: ~268 rows (aproximadamente)
 INSERT INTO `tbl_municipios_condados` (`idMunicipio`, `nombreMunicipio`, `idDepartamento`) VALUES
 	(1, 'Ahuachapán', 1),
 	(2, 'Jujutla', 1),
@@ -679,17 +693,20 @@ CREATE TABLE IF NOT EXISTS `tbl_ordenes` (
   `estadoOrden` int(11) NOT NULL DEFAULT 1,
   `creoQR` int(11) NOT NULL DEFAULT 0,
   `gestorOrden` int(11) NOT NULL,
+  `empacadaPor` text NOT NULL,
   `creadaOrden` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idOrden`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_ordenes: ~4 rows (aproximadamente)
-INSERT INTO `tbl_ordenes` (`idOrden`, `codigoOrden`, `fechaEnvio`, `fechaLlegada`, `emisorOrden`, `receptorOrden`, `tipoPago`, `estadoPago`, `tipoServicio`, `abonoOrden`, `otraDireccionOrden`, `destinoOrden`, `observacionesOrden`, `estadoOrden`, `creoQR`, `gestorOrden`, `creadaOrden`) VALUES
-	(7, 1000, '2025-04-01', '2025-04-05', 2, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 3, 'N/A', 1, 0, 0, '2025-03-27 17:38:22'),
-	(8, 1001, '2025-03-31', '2025-03-31', 9, 1, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '2025-03-31 20:53:46'),
-	(9, 1002, '2025-04-03', '2025-04-03', 1, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 4, 'N/A', 1, 0, 0, '2025-04-03 20:12:22'),
-	(10, 1003, '2025-04-05', '2025-04-15', 1, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 5, 'Tratar con cuidado', 1, 0, 0, '2025-04-03 20:17:36'),
-	(11, 1004, '2025-04-09', '2025-04-09', 1, 8, 'Efectivo', 'Por pagar', 'Entrega', 15.00, '', 6, 'Ninguna', 1, 0, 0, '2025-04-09 21:22:31');
+-- Volcando datos para la tabla db_caminata.tbl_ordenes: ~7 rows (aproximadamente)
+INSERT INTO `tbl_ordenes` (`idOrden`, `codigoOrden`, `fechaEnvio`, `fechaLlegada`, `emisorOrden`, `receptorOrden`, `tipoPago`, `estadoPago`, `tipoServicio`, `abonoOrden`, `otraDireccionOrden`, `destinoOrden`, `observacionesOrden`, `estadoOrden`, `creoQR`, `gestorOrden`, `empacadaPor`, `creadaOrden`) VALUES
+	(7, 1000, '2025-04-01', '2025-04-05', 2, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 3, 'N/A', 1, 0, 0, '', '2025-03-27 17:38:22'),
+	(8, 1001, '2025-03-31', '2025-03-31', 9, 1, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '', '2025-03-31 20:53:46'),
+	(9, 1002, '2025-04-03', '2025-04-03', 1, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '', '2025-04-03 20:12:22'),
+	(10, 1003, '2025-04-05', '2025-04-15', 1, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 5, 'Tratar con cuidado', 1, 0, 0, '', '2025-04-03 20:17:36'),
+	(11, 1004, '2025-04-09', '2025-04-09', 1, 8, 'Efectivo', 'Por pagar', 'Entrega', 15.00, '', 6, 'Ninguna', 1, 0, 0, '', '2025-04-09 21:22:31'),
+	(12, 1005, '2025-04-17', '2025-04-17', 1, 3, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 2, 'N/A', 1, 0, 0, '', '2025-04-17 19:42:11'),
+	(13, 1006, '2025-04-17', '2025-04-17', 4, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, '', 1, 0, 0, 'Edwin Cortez', '2025-04-17 19:48:10');
 
 -- Volcando estructura para tabla db_caminata.tbl_orden_qr
 CREATE TABLE IF NOT EXISTS `tbl_orden_qr` (
@@ -864,17 +881,17 @@ CREATE TABLE IF NOT EXISTS `tbl_receptores` (
   PRIMARY KEY (`idCliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_receptores: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_receptores: ~10 rows (aproximadamente)
 INSERT INTO `tbl_receptores` (`idCliente`, `codigoCliente`, `nombreCliente`, `documentoCliente`, `telefonoCliente`, `correoCliente`, `paisCliente`, `distritoCliente`, `direccionCliente`, `municipioCliente`, `strPais`, `strEstado`, `strMunicipio`, `pivoteEmisor`, `estadoCliente`, `creadoCliente`) VALUES
-	(1, 1000, 'Juan Antonio-Campos Sanchez', '47856946', '78956236', '-', 1, 13, 'Barrio el Calvario, Usulutan', '67', '1- El Salvador', '13- San Miguel ', '67-Chinameca', 1, 1, '2023-03-20 23:08:03'),
-	(2, 1001, 'Flor de Maria-Fuentes Saravia', '56987456', '78956321', '', 0, 0, 'Santa Maria, Usulutan', '', '', '', '', 2, 1, '2023-03-20 23:08:40'),
+	(1, 1000, 'Juan Antonio-Campos Sanchez', '47856946', '78956236', '-', 1, 13, 'Barrio el Calvario', '67', '1- El Salvador', '13- San Miguel ', '67-Chinameca', 1, 1, '2023-03-20 23:08:03'),
+	(2, 1001, 'Flor de Maria-Fuentes Saravia', '56987456', '78956321', '-', 1, 1, 'Barrio el calvario', '2', '1- El Salvador', '1-Ahuachapán', '2-Jujutla', 2, 1, '2023-03-20 23:08:40'),
 	(3, 1002, 'Carmen del Cid-Medrano', '05123698', '74569812', '-', 1, 3, 'El centro, Usulutan', '', '1- El Salvador', '3-Sonsonate', '', 3, 1, '2023-03-21 04:04:33'),
-	(4, 1003, 'Marcos Antonio-Carcamo', '102653489', '23659685', '-', 2, 19, 'El Transito', '', '2- Estados Unidos', '19-California', '', 4, 1, '2025-03-22 16:52:49'),
+	(4, 1003, 'Marcos Antonio-Carcamo', '102653489', '23659685', '-', 2, 52, '123 Main Street', '268', '2- Estados Unidos', '52- Pensilvania ', '268-Pittsburg', 4, 1, '2025-03-22 16:52:49'),
 	(5, 1004, '', '', '', '', 0, 0, '', '', '', '', '', 5, 0, '2025-03-26 16:52:57'),
 	(6, 1005, '', '', '', '', 0, 0, '', '', '', '', '', 6, 0, '2025-03-26 16:55:21'),
-	(7, 1006, 'Francisco Adalberto-Campos', '123456', '26359874', 'example@example.com', 1, 11, 'Santa Maria', '', '1-El Salvador', '11-Usulután', '', 7, 1, '2025-03-26 19:47:06'),
+	(7, 1006, 'Francisco Adalberto-Campos', '123456', '26359874', 'example@example.com', 1, 11, 'Colonia La Pradera', '61', '1-El Salvador', '11-Usulután', '61-Santa María', 7, 1, '2025-03-26 19:47:06'),
 	(8, 1007, 'Marcos Antonio-Maldonado', '987456321', '23659874', 'example@example.com', 1, 12, 'Colonia La Pradera', '', '1-El Salvador', '12-San Miguel', '', 8, 1, '2025-03-26 22:08:06'),
-	(9, 1008, 'Felipe Alonso-Campos', '456321', '6398-5698', 'example@example.com', 2, 61, 'Por ahi', '', '2- Estados Unidos', '61-Washington', '', 9, 1, '2025-03-27 14:43:05'),
+	(9, 1008, 'Felipe Alonso-Campos', '456321', '6398-5698', 'example@example.com', 2, 57, '1200  HOLLY HILL DR GRAND PRAIRIE', '264', '2- Estados Unidos', '57- Texas ', '264-Irving', 9, 1, '2025-03-27 14:43:05'),
 	(10, 1009, 'Juan Adalberto-Valdez Parada', '963265987', '7546-8956', '-', 1, 11, 'Barrio la parroquia', '51', '1-El Salvador', '11-Usulután', '51-Jucuarán', 10, 1, '2025-04-08 17:20:18');
 
 -- Volcando estructura para tabla db_caminata.tbl_usuarios
@@ -892,7 +909,7 @@ CREATE TABLE IF NOT EXISTS `tbl_usuarios` (
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_usuarios: ~1 rows (aproximadamente)
 INSERT INTO `tbl_usuarios` (`idUsuario`, `nombreUsuario`, `psUsuario`, `idEmpleado`, `idAcceso`, `estadoUsuario`, `codigoVerificacion`, `pivoteUsuario`, `nivelUsuario`, `fechaUsuario`) VALUES
 	(1, 'Informatica', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, 1, '', 0, 0, '2025-04-11 17:29:13');
 

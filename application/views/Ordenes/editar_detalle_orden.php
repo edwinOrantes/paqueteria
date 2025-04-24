@@ -40,6 +40,11 @@
   </script>
 <?php endif; ?>
 
+<style>
+    .form-control{
+        border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+</style>
 <!--app-content open-->
 <div class="main-content app-content mt-0">
     <div class="side-app">
