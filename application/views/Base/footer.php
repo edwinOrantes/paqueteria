@@ -572,16 +572,16 @@
         <!-- Country-selector modal-->
 
         <!-- footer -->
-            <footer class="footer">
+            <!-- <footer class="footer">
                 <div class="container">
                     <div class="row align-items-center flex-row-reverse">
                         <div class="col-md-12 col-sm-12 text-center">
-                            Copyright © <?= date("Y"); ?> <a href="javascript:void(0)">Hospital Orellana</a>. Designed with <span
+                            Copyright © <?= date("Y"); ?> <a href="javascript:void(0)">Encomiendas Campos</a>. Designed with <span
                                 class="fa fa-heart text-success"></span> by <a href="javascript:void(0)"> Edwin Orantes </a> All rights reserved.
                         </div>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
         <!-- footer end -->
 
     </div>

@@ -41,7 +41,7 @@
       <!-- global-loader -->
       <div id="global-loader">
          <!-- <img src="<?php echo base_url(); ?>public/images/loader.svg" class="loader-img" alt="Loader"> -->
-         <img src="<?php echo base_url(); ?>public/images/loader.png" class="loader-img" alt="Loader">
+         <!-- <img src="<?php echo base_url(); ?>public/images/loader.png" class="loader-img" alt="Loader"> -->
       </div>
       <!-- /global-loader -->
       <!-- page -->
