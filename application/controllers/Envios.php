@@ -65,7 +65,7 @@ class Envios extends CI_Controller {
 	public function lista_envios(){
 
 		$data["envios"] = $this->Envios_Model->listaEnvios();
-
+		$data["gestores"] = $this->Empleado_Model->empleadosPorCargo(3);
 		$this->load->view('Base/header');
 		$this->load->view('Envios/lista_envios', $data);
 		$this->load->view('Base/footer');
@@ -103,13 +103,38 @@ class Envios extends CI_Controller {
 	}
 
 
-
 	public function guardar_maleta(){
 		if($this->input->is_ajax_request()){
 			$datos = $this->input->post();
 			$datos["codigo"] = time();
 			$resp = $this->Envios_Model->guardarMaleta($datos);
 			if($resp){
+				$respuesta = array('estado' => 1, 'respuesta' => 'Exito');
+				header("content-type:application/json");
+				print json_encode($respuesta);
+			}else{
+				$respuesta = array('estado' => 0, 'respuesta' => 'Error');
+				header("content-type:application/json");
+				print json_encode($respuesta);
+			}
+		}
+		else{
+			$respuesta = array('estado' => 0, 'respuesta' => 'Error');
+			header("content-type:application/json");
+			print json_encode($respuesta);
+		}
+	}
+
+	public function eliminar_detalle_maleta(){
+		if($this->input->is_ajax_request()){
+			$datos = $this->input->post();
+
+			$fila = $this->Envios_Model->filaDetalleMaleta($datos["fila"]);
+			$orden = $fila->idOrden;
+
+			$resp = $this->Envios_Model->eliminarDetalleMaleta($datos);
+			if($resp){
+				$this->Ordenes_Model->actualizarEstadoOrden($orden);
 				$respuesta = array('estado' => 1, 'respuesta' => 'Exito');
 				header("content-type:application/json");
 				print json_encode($respuesta);
@@ -245,6 +270,20 @@ class Envios extends CI_Controller {
 			header("content-type:application/json");
 			print json_encode($respuesta);
 		}
+	}
+
+	public function asignar_gestor(){
+		$datos = $this->input->post();
+		$resp = $this->Envios_Model->asignarGestor($datos);
+		if ($resp){
+			$this->session->set_flashdata("exito","Gestor asignado con exito");
+			redirect(base_url()."Envios/lista_envios");
+		}else{
+			$this->session->set_flashdata("error","Error al asignar el gestor");
+			redirect(base_url()."Envios/lista_envios");
+		}
+
+		// echo json_encode($datos);
 	}
 
 	public function pruebas(){

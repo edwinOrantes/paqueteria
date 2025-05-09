@@ -35,6 +35,7 @@ class Envios_Model extends CI_Model
        }
     }
 
+    /* // Version anterios
     public function listaEnvios(){
        $sql = "SELECT emp.nombreEmpleado, emp.telefonoEmpleado, d.nombreDestino, e.* FROM tbl_envios AS e
                 INNER JOIN tbl_empleados AS emp ON e.gestorEnvio = emp.idEmpleado
@@ -42,12 +43,30 @@ class Envios_Model extends CI_Model
                 ORDER BY e.idEnvio DESC";
         $datos = $this->db->query($sql);
         return $datos->result();
+    } */
+    
+    public function listaEnvios(){
+       $sql = "SELECT d.nombreDestino, e.* FROM tbl_envios AS e
+                INNER JOIN tbl_destinos AS d ON d.idDestino = e.destinoOrden
+                ORDER BY e.idEnvio DESC";
+        $datos = $this->db->query($sql);
+        return $datos->result();
     }
 
-    public function detalleEnvio($envio = null){
+    /* public function detalleEnvio($envio = null){
         if($envio != null){
             $sql = "SELECT emp.nombreEmpleado, d.nombreDestino, e.* FROM tbl_envios AS e
                     INNER JOIN tbl_empleados AS emp ON e.gestorEnvio = emp.idEmpleado
+                    INNER JOIN tbl_destinos AS d ON d.idDestino = e.destinoOrden
+                    WHERE e.idEnvio = '$envio' ";
+            $datos = $this->db->query($sql);
+            return $datos->row();
+        }
+    } */
+
+    public function detalleEnvio($envio = null){
+        if($envio != null){
+            $sql = "SELECT d.nombreDestino, e.* FROM tbl_envios AS e
                     INNER JOIN tbl_destinos AS d ON d.idDestino = e.destinoOrden
                     WHERE e.idEnvio = '$envio' ";
             $datos = $this->db->query($sql);
@@ -63,7 +82,7 @@ class Envios_Model extends CI_Model
                     FROM tbl_envios e
                     JOIN  tbl_maletas m ON e.idEnvio = m.idEnvio
                     JOIN  tbl_maleta_ordenes mo ON m.idMaleta = mo.idMaleta
-                    WHERE e.idEnvio = ? ";
+                    WHERE e.idEnvio = ? AND mo.estado = '1' ";
             $resultado = $this->db->query($sql, $idEnvio)->result();
         
             $agrupado = [];
@@ -148,9 +167,42 @@ class Envios_Model extends CI_Model
     
     public function detalleMaleta($maleta = null){
         if($maleta != null){
-            $sql = "SELECT * FROM tbl_maleta_ordenes AS mo WHERE mo.idMaleta = '$maleta' ";
+            $sql = "SELECT * FROM tbl_maleta_ordenes AS mo WHERE mo.idMaleta = '$maleta' AND mo.estado = '1' ";
             $datos = $this->db->query($sql);
             return $datos->result();
+        }
+    } 
+    
+    public function filaDetalleMaleta($fila = null){
+        if($fila != null){
+            $sql = "SELECT * FROM tbl_maleta_ordenes AS mo WHERE mo.idOrdenMaleta = '$fila' ";
+            $datos = $this->db->query($sql);
+            return $datos->row();
+        }
+    } 
+    
+    public function eliminarDetalleMaleta($data = null){
+        if($data != null){
+            $sql = "UPDATE tbl_maleta_ordenes AS mo SET mo.estado = '0' WHERE mo.idOrdenMaleta = ? ";
+            if($this->db->query($sql, $data)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+    } 
+    
+    public function asignarGestor($data = null){
+        if($data != null){
+            $sql = "UPDATE tbl_envios SET gestorEnvio = ?, strGestor = ? WHERE idEnvio = ?";
+            if($this->db->query($sql, $data)){
+                return true;
+            }else{
+                return false;
+            }
         }
     } 
  

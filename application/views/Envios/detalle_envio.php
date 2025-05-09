@@ -40,6 +40,12 @@
   </script>
 <?php endif; ?>
 
+<style>
+    .fa-1x{
+        font-size: 20px
+    }
+</style>
+
 <?php
     $totalMaletas = $maletas->cantidad + $manos->cantidad;
 ?>
@@ -60,7 +66,7 @@
                         </ol>
                     </div>
                     <div class="text-right">
-                        <a class="btn btn-success mt-3" href="<?php echo base_url(); ?>Ordenes/"><i class="fe fe-arrow-left"></i> Volver </a>
+                        <a class="btn btn-success mt-3" href="<?php echo base_url(); ?>Envios/lista_envios"><i class="fe fe-arrow-left"></i> Volver </a>
                         
                     </div>
                 </div>
@@ -78,7 +84,15 @@
                                             <td class="text-black"><strong>Código : </strong></td>
                                             <td><?php echo $detalle_envio->codigoEnvio; ?></td>
                                             <td class="text-black"><strong>Gestor: </strong></td>
-                                            <td><?php echo $detalle_envio->nombreEmpleado; ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($detalle_envio->gestorEnvio == 0){
+                                                        echo '<span class="badge bg-danger">Pendiente</span>';
+                                                    }else{
+                                                        echo $detalle_envio->strGestor;
+                                                    }
+                                                ?>
+                                            </td> 
                                             <td><button type="button" class="btn btn-primary btn-sm agregarMaleta" data-tipo="1"> <i class="fa fa-plus"></i> Agregar maleta</button></td>
                                             
                                             
@@ -268,7 +282,7 @@
                             html += '    <td class="text-center">'+flag+'</td>';
                             html += '    <td class="text-center">'+datos[i]["codigoOrdenMaleta"]+'</td>';
                             html += '    <td class="text-center">'+datos[i]["strDetalle"]+'</td>';
-                            html += '    <td class="text-center text-danger"><i class="fa fa-trash eliminarDetalle"></i></td>';
+                            html += '    <td class="text-center text-danger"><input type="hidden" value="'+datos[i]["idOrdenMaleta"]+'" class="idOrdenMaleta"><i class="fa fa-trash eliminarDetalle fa-1x"></i></td>';
                             html += '</tr>';
                             flag++;
                         }
@@ -283,7 +297,6 @@
                 }
             }
         });
-
 
 
     });
@@ -331,7 +344,7 @@
                                         html += '    <td class="text-center">'+flag+'</td>';
                                         html += '    <td class="text-center">'+datos[i]["codigoOrdenMaleta"]+'</td>';
                                         html += '    <td class="text-center">'+datos[i]["strDetalle"]+'</td>';
-                                        html += '    <td class="text-center text-danger"><i class="fa fa-trash eliminarDetalle"></i></td>';
+                                        html += '    <td class="text-center text-danger"><input type="hidden" value="'+datos[i]["idOrdenMaleta"]+'" class="idOrdenMaleta"><i class="fa fa-trash eliminarDetalle fa-1x"></i></td>';
                                         html += '</tr>';
                                         flag++;
                                     }
@@ -380,7 +393,32 @@
         }
     });
 
+    $(document).on("click", ".eliminarDetalle", function(e) {
+        // Verificar si se ha presionado la tecla Enter (código 13)
+        var boton = this;
+        var fila = $(this).closest('tr').find('.idOrdenMaleta').val();
+        var datos = {
+            fila: fila
+        }
 
+        if (confirm("¿Estás seguro de eliminar este detalle?")) {
+            $.ajax({
+                url: "../../eliminar_detalle_maleta",
+                type: "POST",
+                data: datos,
+                success: function(respuesta) {
+                    var registro = eval(respuesta);
+                    if (Object.keys(registro).length > 0) {
+                        if (registro.estado == 1) {
+                            $(boton).closest('tr').remove()
+                        } 
+                    }
+                }
+            });
+        }
+
+
+    });
 
 </script>
 

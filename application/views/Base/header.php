@@ -249,6 +249,17 @@
                   </li>
 
                   <li class="slide">
+                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file-plus"></i><span
+                        class="side-menu__label">Entrega de paquetes</span><i class="angle fe fe-chevron-right"></i></a>
+                     <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="<?= base_url(); ?>Entregas/" class="slide-item">Entregas</a></li>
+                        <li><a href="<?= base_url(); ?>Entregas/lista_paquetes" class="slide-item">Paquetes</a></li>
+                        <li><a href="<?= base_url(); ?>Entregas/busqueda_paquete" class="slide-item">Busqueda paquetes</a></li>
+                     </ul>
+                  </li>
+
+                  <li class="slide">
                      <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-users"></i><span
                         class="side-menu__label">Empleados</span><i class="angle fe fe-chevron-right"></i></a>
                      <ul class="slide-menu">

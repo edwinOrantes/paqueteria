@@ -25,7 +25,7 @@ class Ordenes extends CI_Controller {
 		$this->load->view('Base/header');
 		$this->load->view('Ordenes/lista_ordenes', $data);
 		$this->load->view('Base/footer');
-		// echo json_encode($data["empleados"]);
+		// echo json_encode($data["ordenes"]);
 	}
 
 	public function agregar_orden(){

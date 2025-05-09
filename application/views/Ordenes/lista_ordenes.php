@@ -102,9 +102,14 @@
                                                                 Acciones
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <li><a class="dropdown-item" data-id="1" href="<?php echo base_url(); ?>Ordenes/detalle_orden/<?php echo $row->idOrden;?>/" class="text-primary" title="Ver detalle"></i>Ver</a></li>
-                                                                <li><a class="dropdown-item" href="<?php echo base_url(); ?>Ordenes/editar_detalle_orden/<?php echo $row->idOrden;?>/" data-id="2">Editar</a></li>
-                                                                <li><a class="dropdown-item" href="#" data-id="3">Eliminar</a></li>
+                                                                <!-- <li><a class="dropdown-item" data-id="1" href="<?php echo base_url(); ?>Ordenes/detalle_orden/<?php echo $row->idOrden;?>/" class="text-primary" title="Ver detalle"></i>Ver</a></li> -->
+                                                                <?php
+                                                                    if($row->estadoOrden == 1){
+                                                                        echo '<li><a class="dropdown-item" href="'.base_url().'Ordenes/editar_detalle_orden/'.$row->idOrden.'/" data-id="2">Editar</a></li>';
+                                                                    }
+                                                                ?>
+                                                                
+                                                                <!-- <li><a class="dropdown-item" href="#" data-id="3">Eliminar</a></li> -->
                                                                 <li><a class="dropdown-item" target="blank" href="<?php echo base_url(); ?>Ordenes/ver_etiquetas/<?php echo $row->idOrden;?>/" data-id="4">Imprimir viñetas</a></li>
                                                                 <li><a class="dropdown-item" target="blank" href="<?php echo base_url(); ?>Ordenes/ver_hoja_envio/<?php echo $row->idOrden;?>/" data-id="5">Imprimir hoja resumen</a></li>
                                                             </ul>

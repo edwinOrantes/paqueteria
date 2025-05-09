@@ -17,8 +17,9 @@ class Ordenes_Model extends CI_Model
 
     public function obtenerOrdenes(){
         $sql = "SELECT
-                o.idOrden, o.codigoOrden, o.creoQR, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden, r.nombreCliente as receptorOrden, o.fechaEnvio, o.fechaLlegada,
-                o.empacadaPor, o.tipoServicio, r.direccionCliente AS destinoOrden, r.strPais, r.strEstado, o.tipoPago, o.estadoPago, o.estadoPago, o.otraDireccionOrden, o.estadoOrden, eo.nombreEstado
+                o.idOrden, o.codigoOrden, o.creoQR, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden, r.nombreCliente as receptorOrden, 
+                o.fechaEnvio, o.fechaLlegada, o.empacadaPor, o.tipoServicio, r.direccionCliente AS destinoOrden, r.strPais, r.strEstado, o.tipoPago, o.estadoPago, 
+                o.estadoPago, o.otraDireccionOrden, o.estadoOrden, eo.nombreEstado, o.estadoOrden
                 FROM tbl_ordenes AS o
                 INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente)
                 INNER JOIN tbl_receptores AS r ON(o.receptorOrden = r.idCliente)
@@ -101,6 +102,19 @@ class Ordenes_Model extends CI_Model
                                                  totalPaquete = ?
                     WHERE idDetalle = ?";
             if($this->db->query($sql, $data)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    public function actualizarEstadoOrden($orden = null){
+        if($orden != null){
+            $sql = "UPDATE tbl_ordenes SET estadoOrden = '1' WHERE idOrden  = '$orden' ";
+            if($this->db->query($sql)){
                 return true;
             }else{
                 return false;

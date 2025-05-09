@@ -203,7 +203,7 @@
                                         <div class="text-center mt-6">
                                             <input type="hidden" value="<?php echo @$detalle_articulos->idDetalle; ?>" name="idDetalleOrden">
                                             <input type="hidden" value="<?php echo $idOrden; ?>" name="idOrden">
-                                            <button class="btn btn-primary">Actualizar detalle <i class="fa fa-save"></i></button>
+                                            <button class="btn btn-primary">Guardar detalle <i class="fa fa-save"></i></button>
                                         </div>
                                     </form>
                                 </div>

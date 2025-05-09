@@ -137,46 +137,30 @@ class Clientes_Model extends CI_Model
         }
     }
 
+    public function resumenXCliente($cliente = null, $pivote = null){
+        if($cliente != null){
+            $sql = "SELECT 
+                o.idOrden, o.codigoOrden, o.abonoOrden, em.nombreCliente AS emisorOrden, em.direccionCliente AS origenOrden, r.nombreCliente as receptorOrden, 
+                o.fechaEnvio, o.fechaLlegada, o.empacadaPor, o.tipoServicio, r.direccionCliente AS destinoOrden, r.strPais, r.strEstado, o.tipoPago, o.estadoPago, 
+                od.totalPaquete, o.estadoPago, o.otraDireccionOrden, o.estadoOrden, eo.nombreEstado, o.estadoOrden
+                FROM tbl_ordenes AS o
+                INNER JOIN tbl_detalle_orden AS od ON od.idOrden = o.idOrden
+                INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente)
+                INNER JOIN tbl_receptores AS r ON(o.receptorOrden = r.idCliente)
+                INNER JOIN tbl_estado_orden AS eo ON(o.estadoOrden = eo.idEstado)";
+            if($pivote == 1){
+                $sql .= "WHERE o.emisorOrden = '$cliente' ";
+            }else{
+                $sql .= "WHERE o.receptorOrden = '$cliente' ";
+            }
 
-
-/*
-    public function obtenerArea($id = null){
-        $sql = "SELECT * FROM tbl_areas_hospital WHERE idArea = '$id' ";
-        $datos = $this->db->query($sql);
-        return $datos->row();
-    }
-
-    public function obtenerEmpleados(){
-        $sql = "SELECT * FROM tbl_empleados";
-        $datos = $this->db->query($sql);
-        return $datos->result();
-    }
-
-
-    public function obtenerEmpleadosXArea($area = null){
-        $sql = "SELECT * FROM tbl_empleados WHERE areaEmpleado = '$area' ";
-        $datos = $this->db->query($sql);
-        return $datos->result();
-    }
-
-
-
-
-    public function validadEmpleado($id = null){
-        $sql = "SELECT * FROM tbl_empleados WHERE idEmpleado = '$id'";
-        $datos = $this->db->query($sql);
-        return $datos->result();
+            $datos = $this->db->query($sql);
+            return $datos->result();
+        }
     }
 
 
-    // Para calendario
-    public function obtenerEventos(){
-        $sql = "SELECT * FROM tbl_eventos";
-        $datos = $this->db->query($sql);
-        return $datos->result();
-    }
-    // Para calendario
-*/
+
 
 }
 

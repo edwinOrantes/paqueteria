@@ -65,9 +65,13 @@ class Clientes extends CI_Controller {
 	
 	public function detalle_cliente($id = null){
 		$data["cliente"] = $this->Clientes_Model->obtenerCliente($id);
+		$data["enviadas"] = $this->Clientes_Model->resumenXCliente($id, 1);
+		$data["recibidas"] = $this->Clientes_Model->resumenXCliente($id, 2);
+
 		$this->load->view('Base/header');
 		$this->load->view('Clientes/detalle_cliente', $data);
 		$this->load->view('Base/footer');
+
 		// echo json_encode($data);
 	}
 	

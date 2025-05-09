@@ -71,17 +71,17 @@
                         <form class="needs-validation" method="post" action="<?= base_url(); ?>Envios/guardar_envio" novalidate>
                                 <div class="form-row">
 
-                                    <div class="col-xl-6 mb-6">
-                                        <label for="codigoEnvio">Código orden</label>
+                                    <div class="col-xl-12 mb-6">
+                                        <label for="codigoEnvio">Código del envio</label>
                                         <input type="text" class="form-control" value="<?php echo $codigo; ?>" id="" name="" readonly>
                                         <input type="hidden" class="form-control" value="<?php echo $codigo; ?>" id="codigoEnvio" name="codigoEnvio" required>
                                         <div class="invalid-tooltip">Este campo es obligatorio</div>
                                     </div>
 
 
-                                    <div class="col-xl-6 mb-3">
+                                    <div class="col-xl-6 mb-3" style="display: none">
                                        <label for="gestorOrden"><strong>Gestor asignado</strong></label>
-                                       <select class="form-control" id="gestorOrden" name="gestorOrden" required="">
+                                       <select class="form-control" id="gestorOrden" name="gestorOrden">
                                            <option value="">.:: Seleccionar ::.</option>
                                            <?php
                                                foreach ($gestores as $row) {
@@ -94,6 +94,7 @@
 
                                    <div class="col-xl-6 mb-6">
                                         <label for="fechaEnvio">Fecha de envio</label>
+                                        <input type="hidden" value="0" class="form-control" id="gestorOrden" name="gestorOrden">
                                         <input type="date" class="form-control" id="fechaEnvio" name="fechaEnvio" required>
                                         <div class="invalid-tooltip">Este campo es obligatorio</div>
                                     </div>
@@ -111,38 +112,10 @@
                                        <div class="invalid-tooltip">Este campo es obligatorio</div>
                                    </div>
 
-                                    <!-- <div class="col-xl-3 mb-3">
-                                       <label for="maletasEnvio"><strong>Maletas</strong></label>
-                                       <select class="form-control" id="maletasEnvio" name="maletasEnvio" required>
-                                           <option value="">.:: Seleccionar ::.</option>
-                                           <?php
-                                               for ($i=1; $i <= 10; $i++){
-                                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                                    
-                                               }
-                                           ?>
-                                       </select>
-                                       <div class="invalid-tooltip">Este campo es obligatorio</div>
-                                   </div>
-
-                                    <div class="col-xl-3 mb-3">
-                                       <label for="manosEnvio"><strong>En mano</strong></label>
-                                       <select class="form-control" id="manosEnvio" name="manosEnvio" required>
-                                           <option value="">.:: Seleccionar ::.</option>
-                                           <?php
-                                               for ($i=0; $i <= 10; $i++){
-                                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                                    
-                                               }
-                                           ?>
-                                       </select>
-                                       <div class="invalid-tooltip">Este campo es obligatorio</div>
-                                   </div> -->
-
                                 </div>
 
                                 <div class="text-center mt-5">
-                                     <button class="btn btn-primary w-25" type="submit">Crear orden <i class="fe fe-save"></i></button>
+                                     <button class="btn btn-primary w-25" type="submit">Crear envio <i class="fe fe-save"></i></button>
                                  </div>
                             </form>
                         </div>

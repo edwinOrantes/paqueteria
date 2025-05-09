@@ -66,7 +66,130 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="card-body"></div>
+                        <div class="card-body">
+                            <div class="panel panel-primary">
+                                <div class="tab-menu-heading">
+                                    <div class="tabs-menu">
+                                        <!-- Tabs -->
+                                        <ul class="nav panel-tabs">
+                                            <li><a href="#enviadas" class="" data-bs-toggle="tab">Enviadas <span class="badge bg-success"><?php echo count($enviadas); ?></span> </a></li>
+                                            <li><a href="#recibidas" data-bs-toggle="tab" class="">Recibidas <span class="badge bg-success"><?php echo count($recibidas); ?></span> </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body tabs-menu-body">
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane active" id="enviadas">
+                                            <?php
+                                                if(sizeof($enviadas) > 0){
+                                            ?>
+
+                                                <table class="table table-bordered text-nowrap border-bottom" id="">
+                                                    <thead>
+                                                        <tr class="bg-primary">
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Código</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Receptor</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Estado del pago</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Estado del envio</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Dirección</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Opción</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                            $estadoOrden = "";
+                                                            foreach ($enviadas as $row) {
+                                                        ?>
+                                                            <tr>
+                                                                <td class="border-bottom-0 text-center"><?php echo $row->codigoOrden; ?></td>
+                                                                <td class="border-bottom-0 text-center"><?php echo str_replace("-", " ", $row->receptorOrden); ?></td>
+                                                                <td class="border-bottom-0 text-center"><?php echo $row->estadoPago; ?></td>
+                                                                <td class="border-bottom-0 text-center"><?php echo $row->nombreEstado; ?></td>
+                                                                <td class="border-bottom-0 text-center">
+                                                                    <?php 
+                                                                        $pais = explode("-", $row->strPais);
+                                                                        $estado = explode("-", $row->strEstado);
+                                                                        echo $row->destinoOrden.", ".$estado[1].", ".$pais[1];
+                    
+                                                                    ?>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <input type="hidden" value="<?php echo $row->idOrden; ?>" class="idOrden">
+                                                                    <a href="#validarEntrega" data-bs-toggle="modal" class="btn btn-primary btn-sm validarEntrega"><i class="fa fa-file"></i> Ver </a>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+
+                                            <?php 
+                                                }else{
+                                                    echo '<div class="alert-danger p-3 text-center">No hay datos que mostrar</div>';
+                                                }
+                                            ?>
+                                        </div>
+
+                                        <div class="tab-pane" id="recibidas">
+                                            <?php
+                                                if(sizeof($recibidas) > 0){
+                                            ?>
+
+                                                <table class="table table-bordered text-nowrap border-bottom" id="">
+                                                    <thead>
+                                                        <tr class="bg-primary">
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Código</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Receptor</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Estado del pago</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Estado del envio</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Dirección</strong></th>
+                                                            <th class="border-bottom-0 text-center text-white"><strong>Opción</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                            $estadoOrden = "";
+                                                            foreach ($recibidas as $row) {
+                                                        ?>
+                                                            <tr>
+                                                                <td class="border-bottom-0 text-center"><?php echo $row->codigoOrden; ?></td>
+                                                                <td class="border-bottom-0 text-center"><?php echo str_replace("-", " ", $row->receptorOrden); ?></td>
+                                                                <td class="border-bottom-0 text-center"><?php echo $row->estadoPago; ?></td>
+                                                                <td class="border-bottom-0 text-center"><?php echo $row->nombreEstado; ?></td>
+                                                                <td class="border-bottom-0 text-center">
+                                                                    <?php 
+                                                                        $pais = explode("-", $row->strPais);
+                                                                        $estado = explode("-", $row->strEstado);
+                                                                        echo $row->destinoOrden.", ".$estado[1].", ".$pais[1];
+                    
+                                                                    ?>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <input type="hidden" value="<?php echo $row->idOrden; ?>" class="idOrden">
+                                                                    <a href="#validarEntrega" data-bs-toggle="modal" class="btn btn-primary btn-sm validarEntrega"><i class="fa fa-file"></i> Ver </a>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            <?php 
+                                                }else{
+                                                    echo '<div class="alert-danger p-3 text-center">No hay datos que mostrar</div>';
+                                                }
+                                            ?>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

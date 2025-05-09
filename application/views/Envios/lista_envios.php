@@ -38,7 +38,7 @@
                                 <li class="breadcrumb-item active" aria-current="page">Lista envios</li>
                             </ol>
                         </div>
-                        <a href="<?php echo base_url(); ?>Ordenes/agregar_orden" class="btn btn-primary"> Agregar envio <i class="fe fe-file-plus iconoPlus"></i></a>
+                        <a href="<?php echo base_url(); ?>Envios/" class="btn btn-primary"> Agregar envio <i class="fe fe-file-plus iconoPlus"></i></a>
                     </div>
                 <!-- page-header end -->
 
@@ -74,14 +74,36 @@
                                             ?>
                                                 <tr>
                                                     <td class="border-bottom-0 text-center"><?php echo $index; ?></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->codigoEnvio; ?></strong></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->nombreEmpleado; ?></strong></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->fechaEnvio; ?></strong></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->nombreDestino; ?></strong></td>
+                                                    <td class="border-bottom-0 text-center"><?php echo $row->codigoEnvio; ?></td>
+                                                    <td class="border-bottom-0 text-center">
+                                                        <?php 
+                                                            if($row->gestorEnvio > 0){
+                                                                echo $row->strGestor; 
+                                                            }else{
+                                                                echo '<a href="#asignarGestor" data-bs-toggle="modal" title="Asignar gestor">
+                                                                        <span class="badge bg-danger badge-sm asignarGestor" style="cursor: pointer">Sin asignar</span>
+                                                                      </a>';
+                                                            }
+                                                        ?>
+                                                    </td> 
+                                                    <td class="border-bottom-0 text-center"><?php echo $row->fechaEnvio; ?></td>
+                                                    <td class="border-bottom-0 text-center"><?php echo $row->nombreDestino; ?></td>
 
                                                     <td class="text-center">
-                                                        <a href="<?php echo base_url(); ?>Envios/ver_detalle_envio/<?php echo $row->idEnvio;?>/"><i class="fa fa-file fa-1x"></i></a>
+                                                        <input type="hidden" value="<?php echo $row->idEnvio; ?>" class="idEnvio">
+                                                        <!-- Dropdown de acciones -->
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Acciones
+                                                            </button>
+                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                <li><a class="dropdown-item" data-id="1" href="<?php echo base_url(); ?>Envios/ver_detalle_envio/<?php echo $row->idEnvio;?>/" class="text-primary" title="Ver detalle"></i>Ver</a></li>
+                                                                <li><a class="dropdown-item" href="<?php echo base_url(); ?>Envios/detalle_envio/<?php echo $row->idEnvio;?>/" data-id="2">Editar</a></li>
+                                                                <!-- <li><a class="dropdown-item" target="blank" href="<?php echo base_url(); ?>Ordenes/ver_etiquetas/<?php echo $row->idOrden;?>/" data-id="4">Imprimir viñetas</a></li> -->
+                                                            </ul>
+                                                        </div>
                                                     </td>
+
                                                     
                                                 </tr>
                                             <?php
@@ -109,96 +131,45 @@
 
 
 <!-- Modales -->
-    <div class="modal fade" id="editarEmpleado" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-xl" role="document">
+    <div class="modal fade" id="asignarGestor" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Datos del empleado</h5>
+                    <h5 class="modal-title">DSeleccionar el gestor</h5>
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
                 </div>
-                <form class="needs-validation" method="post" action="<?= base_url(); ?>Empleados/actualizar_empleado" novalidate>
+                <form class="needs-validation" method="post" action="<?= base_url(); ?>Envios/asignar_gestor" novalidate>
                     <div class="modal-body">
                         <div class="form-row">
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="nombreEmpleado">Nombre completo</label>
-                                <input type="text" class="form-control" id="nombreEmpleadoU" name="nombreEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="telefonoEmpleado">Teléfono</label>
-                                <input type="text" class="form-control" id="telefonoEmpleadoU" name="telefonoEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-                            
-                            <div class="col-xl-6 mb-3">
-                                <label for="duiEmpleado">DUI</label>
-                                <input type="text" class="form-control" id="duiEmpleadoU" name="duiEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="correoEmpleado">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correoEmpleadoU" name="correoEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="nacimientoEmpleado">Fecha nacimiento</label>
-                                <input type="date" class="form-control calendario" id="nacimientoEmpleadoU" name="nacimientoEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="ingresoEmpleado">Ingreso Hospital</label>
-                                <input type="date" class="form-control calendario" id="ingresoEmpleadoU" name="ingresoEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="salarioEmpleado">Salario</label>
-                                <input type="text" class="form-control" id="salarioEmpleadoU" name="salarioEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-
-                            <div class="col-xl-6 mb-3">
-                                <label for="areaEmpleado">Area</label>
-                                <select class="form-control" id="areaEmpleadoU" name="areaEmpleado" required>
-                                    <option value="">.:: Seleccionar ::.</option>
+                            <div class="col-xl-12 mb-6">
+                                <label for="idGestor"><strong>Gestor</strong></label>
+                                <select class="form-control" id="idGestor" name="idGestor" required="">
+                                    <option selected disabled value="">.::Seleccionar::.</option>
                                     <?php
-                                        foreach ($areas as $row) {
+                                        foreach ($gestores as $row) {
                                     ?>
-                                    <option value="<?php echo $row->idArea;?>"><?php echo $row->nombreArea;?></option>
+                                        <option value="<?php echo $row->idEmpleado;?>"><?php echo $row->nombreEmpleado;?></option>
                                     <?php
                                         }
                                     ?>
-
                                 </select>
-                                <div class="valid-feedback">Muy bien!</div>
+                                <div class="invalid-feedback">Debes seleccionar una opcion</div>
                             </div>
-
-                            <div class="col-xl-12 mb-3">
-                                <label for="direccionEmpleado">Dirección</label>
-                                <input type="text" class="form-control" id="direccionEmpleadoU" name="direccionEmpleado" required>
-                                <div class="valid-feedback">Muy bien!</div>
-                            </div>
-                            
-                            
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" id="idEmpleadoU" name="idEmpleadoU">
-                        <button class="btn btn-primary">Actualizar datos</button>
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="hidden" id="nombreGestor" name="nombreGestor">
+                        <input type="hidden" id="idEnvioU" name="idEnvio">
+                        <button class="btn btn-primary">Asignar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
 
     <div class="modal  fade" id="eliminarEmpleado" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -238,23 +209,15 @@
         $('input[id="duiEmpleadoU"]').mask('000000000');
     });
 
-    $(document).on("click", "#btnEditarDatos", function(event) {
+    $(document).on("change", "#idGestor", function(event) {
         event.preventDefault();
+        var valor = $(this).val();
+        $("#nombreGestor").val($('#idGestor option:selected').text());
         
-        $("#nombreEmpleadoU").val($(this).closest('tr').find('#nombre').val());
-        $("#telefonoEmpleadoU").val($(this).closest('tr').find('#telefono').val());
-        $("#duiEmpleadoU").val($(this).closest('tr').find('#dui').val());
-        $("#correoEmpleadoU").val($(this).closest('tr').find('#correo').val());
-        $("#nacimientoEmpleadoU").val($(this).closest('tr').find('#nacimiento').val());
-        $("#ingresoEmpleadoU").val($(this).closest('tr').find('#ingreso').val());
-        $("#salarioEmpleadoU").val($(this).closest('tr').find('#salario').val());
-        $("#areaEmpleadoU").val($(this).closest('tr').find('#area').val());
-        $("#direccionEmpleadoU").val($(this).closest('tr').find('#direccion').val()); 
-        $("#idEmpleadoU").val($(this).closest('tr').find('#idEmpleado').val()); 
     });
 
-    $(document).on("click", "#btnEliminarDatos", function(event) {
+    $(document).on("click", ".asignarGestor", function(event) {
         event.preventDefault();
-        $("#idEmpleadoE").val($(this).closest('tr').find('#idEmpleado').val()); 
+        $("#idEnvioU").val($(this).closest('tr').find('.idEnvio').val()); 
     });
 </script>
