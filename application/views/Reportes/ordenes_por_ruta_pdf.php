@@ -150,6 +150,7 @@
                                 <th>DIRECCION DE ENTREGA</th>
                                 <th>PESO EN LIBRAS</th>
                                 <th>PRECIO POR LIBRA</th>
+                                <th>ADICIONAL</th>
                                 <th>TOTAL</th>
                                 <th>ABONADO</th>
                                 <th>PENDIENTE</th>
@@ -157,7 +158,8 @@
                         </thead>
                         <tbody>
                             <?php
-                            $flag = 1;
+                                $flag = 1;
+                                $totalAdicional = 0;
                                 foreach($ordenes as $row){
                             ?>
                                 <tr>
@@ -171,16 +173,30 @@
                                     <td><?php echo $row->destinoOrden.", ".formatearDireccion($row->rPais, $row->rEstado, $row->rMunicipio) ?></td>
                                     <td><?php echo $row->pesoPaquete; ?></td>
                                     <td>$<?php echo $row->precioLibra; ?></td>
+                                    <td>$
+                                        <?php 
+                                            if(!empty($row->adicionalesPaquete)){
+                                                $adicionales = json_decode($row->adicionalesPaquete, true);
+                                                
+                                                foreach ($adicionales as $fila) {
+                                                    $totalAdicional += $fila["monto"];
+                                                }
+                                                echo $totalAdicional;
+                                            }else{
+                                                echo $totalAdicional = 0;
+                                            }
+                                        ?>
+                                    </td>
                                     
                                     <?php
                                         if($row->estadoPago == "Pagado"){
-                                            echo '<td>$'.number_format($row->totalPaquete, 2).'</td>';
+                                            echo '<td>$'.number_format(($row->totalPaquete + $totalAdicional), 2).'</td>';
                                             echo '<td>$'.number_format($row->abonoOrden ,2).'</td>';
                                             echo '<td>$0.00</td>';
                                         }else{
-                                            echo '<td>$'.number_format($row->totalPaquete, 2).'</td>';
+                                            echo '<td>$'.number_format(($row->totalPaquete + $totalAdicional), 2).'</td>';
                                             echo '<td>$'.number_format($row->abonoOrden ,2).'</td>';
-                                            echo '<td>$'.number_format( ($row->totalPaquete-$row->abonoOrden) ,2).'</td>';
+                                            echo '<td>$'.number_format( (($row->totalPaquete + $totalAdicional)-$row->abonoOrden) ,2).'</td>';
 
                                         }
                                     

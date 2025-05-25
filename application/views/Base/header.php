@@ -217,169 +217,25 @@
                      <h3>General</h3>
                   </li>
 
+                  <?php
+                  $conn = mysqli_connect("localhost", "root", "", "db_caminata");
+                  // $conn = mysqli_connect("192.168.1.253", "ho", "ho24...", "db_hospital_orellana");
+                  if (!$conn){die("Connection failed: " . mysqli_connect_error());}
+                  else{
+                     mysqli_query($conn, "SET CHARACTER SET 'utf8'");
+                     $acceso = $this->session->userdata("acceso_h");
+                     $consulta = "SELECT m.htmlMenu FROM tbl_permisos as p INNER JOIN tbl_accesos as a ON(p.idAcceso = a.idAcceso)
+                     INNER JOIN tbl_menu as m ON(p.idMenu = m.idMenu) WHERE p.idAcceso = '$acceso' AND p.estadoPermiso = '1' ORDER BY p.idMenu ASC";
+                     $datos =  mysqli_query( $conn, $consulta);  
+                     $a = base_url();
+                     while($item = mysqli_fetch_array($datos)){
+                     //echo $item["htmlMenu"];
+                     echo str_replace("<?php echo base_url(); ?>", "$a", $item["htmlMenu"]);
+                     }
+                  }
+                  mysqli_close($conn);
+               ?>
 
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-user-check"></i><span
-                        class="side-menu__label">Clientes</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Clientes/" class="slide-item">Lista de clientes</a></li>
-                        <li><a href="<?= base_url(); ?>Clientes/agregar_cliente/" class="slide-item">Agregar cliente</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span
-                        class="side-menu__label">Ordenes</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Ordenes/agregar_orden" class="slide-item">Nueva orden</a></li>
-                        <li><a href="<?= base_url(); ?>Ordenes/" class="slide-item">Lista de ordenes</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file-plus"></i><span
-                        class="side-menu__label">Envios</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Envios/" class="slide-item">Crear envio</a></li>
-                        <li><a href="<?= base_url(); ?>Envios/lista_envios" class="slide-item">Lista de envios</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file-plus"></i><span
-                        class="side-menu__label">Entrega de paquetes</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Entregas/" class="slide-item">Entregas</a></li>
-                        <li><a href="<?= base_url(); ?>Entregas/lista_paquetes" class="slide-item">Paquetes</a></li>
-                        <li><a href="<?= base_url(); ?>Entregas/busqueda_paquete" class="slide-item">Busqueda paquetes</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-users"></i><span
-                        class="side-menu__label">Empleados</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/">Agregar empleado</a> </li>
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/lista_empleados">Lista empleados</a> </li>
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/cargos_empleados">Cargos</a> </li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span
-                        class="side-menu__label">Gastos</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Gastos/">Cuentas</a> </li>
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Gastos/control_gastos">Control de gastos</a> </li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span
-                        class="side-menu__label">Reportes</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/lista_clientes">Clientes</a> </li>
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/ordenes_por_fecha">Ordenes por fecha</a> </li>
-                        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/ordenes_por_ruta">Ordenes por rutas</a> </li>
-                     </ul>
-                  </li>
-
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fa fa-cog"></i><span
-                        class="side-menu__label">Configuración</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li class="slide-item"><a href="<?php echo base_url(); ?>Accesos/">Accesos</a></li>
-                        <li class="slide-item"><a href="<?php echo base_url(); ?>Usuarios/gestion_usuarios">Usuarios</a></li>
-                        <li class="slide-item"><a href="<?php echo base_url(); ?>Permisos/">Permisos</a></li>
-	                     <li class="slide-item"><a href="<?php echo base_url(); ?>Herramientas/movimientos_hojas">Movimientos hoja</a></li>
-                     </ul>
-                  </li>
-                  
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fa fa-building-o"></i><span
-                        class="side-menu__label">Empresa</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li class="slide-item"><a href="<?php echo base_url(); ?>Empresa/">Información</a></li>
-                     </ul>
-                  </li>
-
-            <!--
-                  <li>
-                     <a class="side-menu__item" href="<?= base_url(); ?>Empleados/lista_empleados/">
-                        <i class="side-menu__icon fe fe-users"></i><span class="side-menu__label">Empleados</span>
-                     </a>
-                  </li>
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-user-check"></i><span
-                        class="side-menu__label">Permisos</span><i class="angle fe fe-chevron-right"></i></a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/1/" class="slide-item">Administración</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/2/" class="slide-item">Cajeras</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/3/" class="slide-item">ISBM</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/4/" class="slide-item">Enfermeria</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/5/" class="slide-item">Hemodiálisis</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/6/" class="slide-item">Laboratorio Clínico</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/7/" class="slide-item">Rayos X</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/8/" class="slide-item">Botiquín</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/9/" class="slide-item">Limpieza</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/10/" class="slide-item">Mantenimiento</a></li>
-                        <li><a href="<?= base_url(); ?>Permisos/lista_permisos/11/" class="slide-item">Vigilante</a></li>
-                     </ul>
-                  </li>
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-file-text"></i><span
-                        class="side-menu__label">Incapacidades</span><i class="angle fe fe-chevron-right"></i>
-                    </a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/1/" class="slide-item">Administración</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/2/" class="slide-item">Cajeras</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/3/" class="slide-item">ISBM</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/4/" class="slide-item">Enfermeria</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/5/" class="slide-item">Hemodiálisis</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/6/" class="slide-item">Laboratorio Clínico</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/7/" class="slide-item">Rayos X</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/8/" class="slide-item">Botiquín</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/9/" class="slide-item">Limpieza</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/10/" class="slide-item">Mantenimiento</a></li>
-                        <li><a href="<?= base_url(); ?>Incapacidades/lista_incapacidades/11/" class="slide-item">Vigilante</a></li>
-                     </ul>
-                  </li>
-
-                  <li class="slide">
-                     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i class="side-menu__icon fe fe-file"></i><span
-                        class="side-menu__label">Acción de personal</span><i class="angle fe fe-chevron-right"></i>
-                    </a>
-                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/1/" class="slide-item">Administración</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/2/" class="slide-item">Cajeras</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/3/" class="slide-item">ISBM</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/4/" class="slide-item">Enfermeria</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/5/" class="slide-item">Hemodiálisis</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/6/" class="slide-item">Laboratorio Clínico</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/7/" class="slide-item">Rayos X</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/8/" class="slide-item">Botiquín</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/9/" class="slide-item">Limpieza</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/10/" class="slide-item">Mantenimiento</a></li>
-                        <li><a href="<?= base_url(); ?>Acciones/lista_acciones/11/" class="slide-item">Vigilante</a></li>
-                     </ul>
-                  </li>
-                  
-                  <li>
-                     <a class="side-menu__item" href="<?= base_url(); ?>Calendario/">
-                        <i class="side-menu__icon fe fe-calendar"></i><span class="side-menu__label">Vacaciones</span>
-                     </a>
-                  </li>-->
 
                </ul>
                <div class="slide-right" id="slide-right">

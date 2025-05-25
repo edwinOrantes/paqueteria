@@ -23,7 +23,8 @@ class Ordenes_Model extends CI_Model
                 FROM tbl_ordenes AS o
                 INNER JOIN tbl_emisores AS em ON(o.emisorOrden = em.idCliente)
                 INNER JOIN tbl_receptores AS r ON(o.receptorOrden = r.idCliente)
-                INNER JOIN tbl_estado_orden AS eo ON(o.estadoOrden = eo.idEstado)";
+                INNER JOIN tbl_estado_orden AS eo ON(o.estadoOrden = eo.idEstado)
+                ORDER BY o.idOrden DESC";
         $datos = $this->db->query($sql);
         return $datos->result();
     }

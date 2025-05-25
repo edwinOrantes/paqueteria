@@ -14,7 +14,7 @@ class Reportes_Model extends CI_Model{
     public function obtenerOrdenes($data = null){
         if($data != null){
             $sql = "SELECT o.idOrden, o.codigoOrden, o.creoQR, o.tipoServicio, o.abonoOrden, o.empacadaPor, em.nombreCliente AS emisorOrden,
-                    DATE(o.creadaOrden) creada, o.abonoOrden, od.totalPaquete, od.pesoPaquete, od.precioLibra, od.declaradoPaquete,
+                    DATE(o.creadaOrden) creada, o.abonoOrden, od.totalPaquete, od.pesoPaquete, od.precioLibra, od.declaradoPaquete, od.adicionalesPaquete,
                     em.strPais AS emPais, em.strEstado AS emEstado, em.direccionCliente AS origenOrden, em.strMunicipio AS emMunicipio,
                     r.strPais AS rPais, r.strEstado AS rEstado,r.nombreCliente as receptorOrden, r.strMunicipio AS rMunicipio,
                     o.fechaEnvio, o.fechaLlegada, r.strPais, r.strEstado,
@@ -34,7 +34,7 @@ class Reportes_Model extends CI_Model{
     public function obtenerOrdenesRutas($data = null){
         if($data != null){
             $sql = "SELECT o.idOrden, o.codigoOrden, o.creoQR, o.tipoServicio, o.abonoOrden, o.empacadaPor, em.nombreCliente AS emisorOrden,
-                    DATE(o.creadaOrden) creada, o.abonoOrden, od.totalPaquete, od.pesoPaquete, od.precioLibra, od.declaradoPaquete,
+                    DATE(o.creadaOrden) creada, o.abonoOrden, od.totalPaquete, od.pesoPaquete, od.precioLibra, od.declaradoPaquete, od.adicionalesPaquete,
                     em.strPais AS emPais, em.strEstado AS emEstado, em.direccionCliente AS origenOrden, em.strMunicipio AS emMunicipio,
                     r.strPais AS rPais, r.strEstado AS rEstado,r.nombreCliente as receptorOrden, r.strMunicipio AS rMunicipio,
                     o.fechaEnvio, o.fechaLlegada, r.strPais, r.strEstado,

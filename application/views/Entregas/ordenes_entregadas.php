@@ -53,12 +53,11 @@
                                         <thead>
                                             <tr class="bg-primary">
                                                 <th class="border-bottom-0 text-center text-white"><strong>Código</strong></th>
+                                                <th class="border-bottom-0 text-center text-white"><strong>Estado de la orden</strong></th>
                                                 <th class="border-bottom-0 text-center text-white"><strong>Emisor</strong></th>
                                                 <th class="border-bottom-0 text-center text-white"><strong>Receptor</strong></th>
                                                 <th class="border-bottom-0 text-center text-white"><strong>Estado del pago</strong></th>
-                                                <th class="border-bottom-0 text-center text-white"><strong>Estado del envio</strong></th>
                                                 <th class="border-bottom-0 text-center text-white"><strong>Dirección</strong></th>
-                                                <th class="border-bottom-0 text-center text-white"><strong>Opción</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -68,10 +67,10 @@
                                             ?>
                                                 <tr>
                                                     <td class="border-bottom-0 text-center"><?php echo $row->codigoOrden; ?></td>
+                                                    <td class="border-bottom-0 text-center"><?php echo $row->nombreEstado."<br>".$row->entregadaPor; ?></td>
                                                     <td class="border-bottom-0 text-center"><?php echo str_replace("-", " ", $row->emisorOrden); ?></td>
                                                     <td class="border-bottom-0 text-center"><?php echo str_replace("-", " ", $row->receptorOrden); ?></td>
                                                     <td class="border-bottom-0 text-center"><?php echo $row->estadoPago; ?></td>
-                                                    <td class="border-bottom-0 text-center"><?php echo $row->nombreEstado; ?></td>
                                                     <td class="border-bottom-0 text-center">
                                                         <?php 
                                                             $pais = explode("-", $row->strPais);
@@ -80,11 +79,6 @@
         
                                                         ?>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <input type="hidden" value="<?php echo $row->idOrden; ?>" class="idOrden">
-                                                        <a href="#validarEntrega" data-bs-toggle="modal" class="btn btn-primary btn-sm validarEntrega"><i class="fa fa-check"></i> Entregado </a>
-                                                    </td>
-                                                    
                                                 </tr>
                                             <?php
                                                 }

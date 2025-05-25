@@ -25,8 +25,11 @@ class Entregas extends CI_Controller {
 	}
 
     public function paquete_entregado(){
+
 		$datos = $this->input->post();
-		$bool = $this->Entregas_Model->paqueteEntregado($datos);
+		$entrega["por"] = date("Y-m-d h:i:s A");
+		$entrega["id"] = $datos["idOrden"];
+		$bool = $this->Entregas_Model->paqueteEntregado($entrega);
 		if($bool){
 			$this->session->set_flashdata("exito","El paquete se marco como entregado!");
 			redirect(base_url()."Entregas/");
@@ -34,8 +37,20 @@ class Entregas extends CI_Controller {
 			$this->session->set_flashdata("error","Error efectuar el proceso!");
 			redirect(base_url()."Entregas/");
 		}
-		// echo json_encode($datos);
 
+		// echo json_encode($entrega);
+
+	}
+
+
+	public function paquetes_entregados(){
+		$data["ordenes"]  = $this->Entregas_Model->paquetesEntregados();
+
+		$this->load->view('Base/header');
+		$this->load->view('Entregas/ordenes_entregadas', $data);
+		$this->load->view('Base/footer');
+
+		// echo json_encode($data);
 	}
 
     

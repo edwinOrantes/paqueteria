@@ -175,15 +175,18 @@ class Reportes extends CI_Controller {
 		$sheet->setCellValue('H1', 'DIRECCION DE ENTREGA');
 		$sheet->setCellValue('I1', 'PESO EN LIBRAS');
 		$sheet->setCellValue('J1', 'PRECIO POR LIBRA');
-		$sheet->setCellValue('K1', 'TOTAL');
-		$sheet->setCellValue('L1', 'ABONADO');
-		$sheet->setCellValue('M1', 'PENDIENTE');
+		$sheet->setCellValue('K1', 'ADICIONALES');
+		$sheet->setCellValue('L1', 'TOTAL');
+		$sheet->setCellValue('M1', 'ABONADO');
+		$sheet->setCellValue('N1', 'PENDIENTE');
 			
 		$number = 1;
 		$flag = 2;
 		$tipoEntidad = "";
         $proveedor = "";
+		$totalAdicional = 0;
 		foreach($ordenes as $d){
+			$totalAdicional = 0;
 			$sheet->setCellValue('A'.$flag, $number);
 			$sheet->setCellValue('B'.$flag, $d->codigoOrden);
 			$sheet->setCellValue('C'.$flag, $d->creada);
@@ -195,15 +198,25 @@ class Reportes extends CI_Controller {
 					$d->destinoOrden.", ".$this->formatear_direccion($d->rPais, $d->rEstado, $d->rMunicipio));
 			$sheet->setCellValue('I'.$flag, $d->pesoPaquete);
 			$sheet->setCellValue('J'.$flag, number_format($d->precioLibra, 2) );
+			
+			if(!empty($d->adicionalesPaquete)){
+				$adicionales = json_decode($d->adicionalesPaquete, true);
+				foreach ($adicionales as $fila) {
+					$totalAdicional += $fila["monto"];
+				}
+				$sheet->setCellValue('K'.$flag, number_format($totalAdicional, 2) );
+			}else{
+				$sheet->setCellValue('K'.$flag, number_format(0, 2) );
+			}
 
 			if($d->estadoPago == "Pagado"){
-				$sheet->setCellValue('K'.$flag, number_format($d->totalPaquete, 2) );
-				$sheet->setCellValue('L'.$flag, number_format($d->abonoOrden ,2) );
-				$sheet->setCellValue('M'.$flag, number_format( 0 ,2) );
+				$sheet->setCellValue('L'.$flag, number_format(($d->totalPaquete + $totalAdicional), 2) );
+				$sheet->setCellValue('M'.$flag, number_format($d->abonoOrden ,2) );
+				$sheet->setCellValue('N'.$flag, number_format( 0 ,2) );
 			}else{
-				$sheet->setCellValue('K'.$flag, number_format($d->totalPaquete, 2) );
-				$sheet->setCellValue('L'.$flag, number_format($d->abonoOrden ,2) );
-				$sheet->setCellValue('M'.$flag, number_format( ($d->totalPaquete-$d->abonoOrden) ,2) );
+				$sheet->setCellValue('L'.$flag, number_format(($d->totalPaquete + $totalAdicional), 2) );
+				$sheet->setCellValue('M'.$flag, number_format($d->abonoOrden ,2) );
+				$sheet->setCellValue('N'.$flag, number_format( (($d->totalPaquete + $totalAdicional)-$d->abonoOrden) ,2) );
 			}
 	
 			$flag = $flag+1;
@@ -218,13 +231,13 @@ class Reportes extends CI_Controller {
 				],
 			],
 		];
-		$sheet->getStyle('A1:M1')->getFont()->setBold(true);		
-		$sheet->getStyle('A1:M'.$flag)->getFont()->setSize(12);
-		$sheet->getStyle('A1:M1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+		$sheet->getStyle('A1:N1')->getFont()->setBold(true);		
+		$sheet->getStyle('A1:N'.$flag)->getFont()->setSize(12);
+		$sheet->getStyle('A1:N1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
 
-		$sheet->getStyle('A1:M'.$flag)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+		$sheet->getStyle('A1:N'.$flag)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 		//Custom width for Individual Columns
-		foreach (range('A', 'M') as $col) {
+		foreach (range('A', 'N') as $col) {
 			$sheet->getColumnDimension($col)->setAutoSize(true);
 		}
 		$curdate = date('d-m-Y H:i:s');
@@ -291,15 +304,18 @@ class Reportes extends CI_Controller {
 			$sheet->setCellValue('H2', 'DIRECCION DE ENTREGA');
 			$sheet->setCellValue('I2', 'PESO EN LIBRAS');
 			$sheet->setCellValue('J2', 'PRECIO POR LIBRA');
-			$sheet->setCellValue('K2', 'TOTAL');
-			$sheet->setCellValue('L2', 'ABONADO');
-			$sheet->setCellValue('M2', 'PENDIENTE');
+			$sheet->setCellValue('K2', 'ADICIONALES');
+			$sheet->setCellValue('L2', 'TOTAL');
+			$sheet->setCellValue('M2', 'ABONADO');
+			$sheet->setCellValue('N2', 'PENDIENTE');
 				
 			$number = 1;
 			$flag = 3;
 			$tipoEntidad = "";
 			$proveedor = "";
+			$totalAdicional = 0;
 			foreach($ordenes as $d){
+				$totalAdicional = 0;
 				$sheet->setCellValue('A'.$flag, $number);
 				$sheet->setCellValue('B'.$flag, $d->codigoOrden);
 				$sheet->setCellValue('C'.$flag, $d->creada);
@@ -307,19 +323,29 @@ class Reportes extends CI_Controller {
 				$sheet->setCellValue('E'.$flag, str_replace("-", " ", $d->receptorOrden));
 				$sheet->setCellValue('F'.$flag, $d->estadoPago);
 				$sheet->setCellValue('G'.$flag, $d->nombreEstado);
-				$sheet->setCellValue('H'.$flag, 
-						$d->destinoOrden.", ".$this->formatear_direccion($d->rPais, $d->rEstado, $d->rMunicipio));
+				$sheet->setCellValue('H'.$flag, $d->destinoOrden.", ".$this->formatear_direccion($d->rPais, $d->rEstado, $d->rMunicipio));
 				$sheet->setCellValue('I'.$flag, $d->pesoPaquete);
 				$sheet->setCellValue('J'.$flag, number_format($d->precioLibra, 2) );
 
-				if($d->estadoPago == "Pagado"){
-					$sheet->setCellValue('K'.$flag, number_format($d->totalPaquete, 2) );
-					$sheet->setCellValue('L'.$flag, number_format($d->abonoOrden ,2) );
-					$sheet->setCellValue('M'.$flag, number_format( 0 ,2) );
+				if(!empty($d->adicionalesPaquete)){
+					$adicionales = json_decode($d->adicionalesPaquete, true);
+					foreach ($adicionales as $fila) {
+						$totalAdicional += $fila["monto"];
+					}
+					$sheet->setCellValue('K'.$flag, number_format($totalAdicional, 2) );
 				}else{
-					$sheet->setCellValue('K'.$flag, number_format($d->totalPaquete, 2) );
-					$sheet->setCellValue('L'.$flag, number_format($d->abonoOrden ,2) );
-					$sheet->setCellValue('M'.$flag, number_format( ($d->totalPaquete-$d->abonoOrden) ,2) );
+					$sheet->setCellValue('K'.$flag, number_format(0, 2) );
+				}
+										
+
+				if($d->estadoPago == "Pagado"){
+					$sheet->setCellValue('L'.$flag, number_format(($d->totalPaquete + $totalAdicional), 2) );
+					$sheet->setCellValue('M'.$flag, number_format($d->abonoOrden ,2) );
+					$sheet->setCellValue('N'.$flag, number_format( 0 ,2) );
+				}else{
+					$sheet->setCellValue('L'.$flag, number_format(($d->totalPaquete + $totalAdicional), 2) );
+					$sheet->setCellValue('M'.$flag, number_format($d->abonoOrden ,2) );
+					$sheet->setCellValue('N'.$flag, number_format( (($d->totalPaquete + $totalAdicional)-$d->abonoOrden) ,2) );
 				}
 		
 				$flag = $flag+1;
@@ -334,13 +360,13 @@ class Reportes extends CI_Controller {
 					],
 				],
 			];
-			$sheet->getStyle('A2:M2')->getFont()->setBold(true);		
-			$sheet->getStyle('A2:M'.$flag)->getFont()->setSize(12);
-			$sheet->getStyle('A2:M2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+			$sheet->getStyle('A2:N2')->getFont()->setBold(true);		
+			$sheet->getStyle('A2:N'.$flag)->getFont()->setSize(12);
+			$sheet->getStyle('A2:N2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
 
-			$sheet->getStyle('A2:M'.$flag)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+			$sheet->getStyle('A2:N'.$flag)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 			//Custom width for Individual Columns
-			foreach (range('A', 'M') as $col) {
+			foreach (range('A', 'N') as $col) {
 				$sheet->getColumnDimension($col)->setAutoSize(true);
 			}
 			$curdate = date('d-m-Y H:i:s');
