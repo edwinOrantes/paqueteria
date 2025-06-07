@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.28-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.27-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.5.0.6677
+-- HeidiSQL Versión:             12.4.0.6659
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,12 +27,11 @@ CREATE TABLE IF NOT EXISTS `tbl_accesos` (
   `estadoAcceso` int(11) NOT NULL,
   `fechaAcceso` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idAcceso`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_accesos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_accesos: ~1 rows (aproximadamente)
 INSERT INTO `tbl_accesos` (`idAcceso`, `nombreAcceso`, `descripcionAcceso`, `estadoAcceso`, `fechaAcceso`) VALUES
-	(1, 'Administrador', 'Acceso total al sistema.', 1, '2025-04-11 17:29:43'),
-	(2, 'Gestor', 'Persona encargada de llevar paquetes', 1, '2025-04-28 19:48:34');
+	(1, 'Administrador', 'Acceso total al sistema.', 1, '2025-04-11 17:29:43');
 
 -- Volcando estructura para tabla db_caminata.tbl_cargos
 CREATE TABLE IF NOT EXISTS `tbl_cargos` (
@@ -109,7 +108,7 @@ INSERT INTO `tbl_detalle_orden` (`idDetalle`, `idOrden`, `contenidoPaquete`, `pe
 	(18, 11, 'ROPA Y JOYAS ', 3.00, 8.00, 0.00, 24.00, '', '[]', '', 1, '2025-04-09 21:22:31'),
 	(19, 12, 'POLLO CAMPERO 1/2\r\nJUGUETES 2/2', 6.00, 8.00, 0.00, 48.00, '', '[{"concepto":"POLLO CAMPERO","detalle":"1\\/2","paquete":1},{"concepto":"JUGUETES","detalle":"2\\/2","paquete":2}]', '', 1, '2025-04-17 19:42:11'),
 	(20, 13, 'JOYAS ', 2.00, 8.00, 0.00, 16.00, '', '[]', '', 1, '2025-04-17 19:48:10'),
-	(21, 14, 'JUGUETES 1/3\r\nPERFUMES 2/3\r\nROPA 3/3', 10.00, 8.00, 0.00, 80.00, '', '[{"concepto":"JUGUETES","detalle":"1\\/3","paquete":1},{"concepto":"PERFUMES","detalle":"2\\/3","paquete":2},{"concepto":"ROPA","detalle":"3\\/3","paquete":3}]', '', 1, '2025-04-26 16:05:48');
+	(21, 14, 'ROPA 1/4\r\nMAQUILLAJE 2/4\r\nVIDEOJUEGOS 3/4\r\nMEDICINA 4/4', 15.00, 8.00, 0.00, 120.00, '[{"concepto":"MEDICINA A","monto":"5"},{"concepto":"MEDICINA B","monto":"4"}]', '[{"concepto":"ROPA","detalle":"1\\/4","paquete":1},{"concepto":"MAQUILLAJE","detalle":"2\\/4","paquete":2},{"concepto":"VIDEOJUEGOS","detalle":"3\\/4","paquete":3},{"concepto":"MEDICINA","detalle":"4\\/4","paquete":4}]', '', 1, '2025-05-24 22:11:42');
 
 -- Volcando estructura para tabla db_caminata.tbl_emisores
 CREATE TABLE IF NOT EXISTS `tbl_emisores` (
@@ -143,7 +142,7 @@ INSERT INTO `tbl_emisores` (`idCliente`, `codigoCliente`, `nombreCliente`, `docu
 	(8, 1007, 'Marcos Antonio-Maldonado', '987456321', '23659874', 'example@example.com', 1, 12, 0, 'Colonia La Pradera', '1-El Salvador', '12-San Miguel', '', 1, '2025-03-26 22:08:06'),
 	(9, 1008, 'Felipe Alonso-Campos', '456321', '6398-5698', 'example@example.com', 2, 57, 264, '1200  HOLLY HILL DR GRAND PRAIRIE', '2- Estados Unidos', '57- Texas ', '264-Irving', 1, '2025-03-27 14:43:05'),
 	(10, 1009, 'Juan Adalberto-Valdez Parada', '963265987', '7546-8956', '-', 1, 11, 51, 'Barrio la parroquia', '1-El Salvador', '11-Usulután', '51-Jucuarán', 1, '2025-04-08 17:20:18'),
-	(11, 1010, 'Marcos Alonso-Batres Campos', '04578965-1', '7352-6398', '-', 1, 11, 43, 'Barrio el Centro', '1-El Salvador', '11-Usulután', '43-Berlín', 1, '2025-04-26 16:04:59');
+	(11, 1010, 'Juan Carlos-Canales Carranza', '09874571-2', '2635-5698', '-', 1, 11, 64, 'Barrio La Parroquia, Casa #15', '1-El Salvador', '11-Usulután', '64-Usulután', 1, '2025-05-24 22:10:32');
 
 -- Volcando estructura para tabla db_caminata.tbl_empleados
 CREATE TABLE IF NOT EXISTS `tbl_empleados` (
@@ -179,29 +178,27 @@ CREATE TABLE IF NOT EXISTS `tbl_empresa` (
   PRIMARY KEY (`idEmpresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_empresa: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_empresa: ~1 rows (aproximadamente)
 INSERT INTO `tbl_empresa` (`idEmpresa`, `nombreEmpresa`, `telefonoEmpresa`, `correoEmpresa`, `direccionEmpresa`, `logoEmpresa`, `creadaEmpresa`) VALUES
-	(1, 'GENCIA DE VIAJES CAMPOS', '+1 (703) 731-7202, 6001-4277', 'agenciadeencomiendascampos@gmail.com', '4TA CALLE ORIENTE #53 USULUTAN, FRENTE A AGROSERVICIO SAN JOSE', 'logo_empresa', '2025-04-02 20:24:43');
+	(1, 'AGENCIA DE VIAJES CAMPOS', '+1 (703) 731-7202, 6001-4277', 'agenciadeencomiendascampos@gmail.com', '4TA CALLE ORIENTE #53 USULUTAN, FRENTE A AGROSERVICIO SAN JOSE', 'logo_empresa', '2025-05-24 22:59:32');
 
 -- Volcando estructura para tabla db_caminata.tbl_envios
 CREATE TABLE IF NOT EXISTS `tbl_envios` (
   `idEnvio` int(11) NOT NULL AUTO_INCREMENT,
   `codigoEnvio` int(11) NOT NULL DEFAULT 0,
   `gestorEnvio` int(11) NOT NULL,
-  `strGestor` text NOT NULL,
   `fechaEnvio` date NOT NULL,
   `destinoOrden` int(11) NOT NULL,
   `agregadoEnvio` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idEnvio`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_envios: ~5 rows (aproximadamente)
-INSERT INTO `tbl_envios` (`idEnvio`, `codigoEnvio`, `gestorEnvio`, `strGestor`, `fechaEnvio`, `destinoOrden`, `agregadoEnvio`) VALUES
-	(1, 1000, 4, 'Catalina de Jesús Miranda Batres', '2025-04-10', 3, '2025-04-04 15:49:17'),
-	(2, 1001, 3, 'Carla Marisa Parada Soto', '2025-04-10', 3, '2025-04-04 15:51:48'),
-	(3, 1002, 4, 'Catalina de Jesús Miranda Batres', '2025-04-22', 3, '2025-04-14 19:34:33'),
-	(4, 1003, 3, 'Carla Marisa Parada Soto', '2025-04-22', 4, '2025-04-14 20:03:47'),
-	(5, 1004, 0, '', '2025-04-30', 1, '2025-04-26 16:11:08');
+-- Volcando datos para la tabla db_caminata.tbl_envios: ~4 rows (aproximadamente)
+INSERT INTO `tbl_envios` (`idEnvio`, `codigoEnvio`, `gestorEnvio`, `fechaEnvio`, `destinoOrden`, `agregadoEnvio`) VALUES
+	(1, 1000, 3, '2025-04-10', 3, '2025-04-04 15:49:17'),
+	(2, 1001, 4, '2025-04-10', 3, '2025-04-04 15:51:48'),
+	(3, 1002, 4, '2025-04-22', 3, '2025-04-14 19:34:33'),
+	(4, 1003, 4, '2025-04-22', 4, '2025-04-14 20:03:47');
 
 -- Volcando estructura para tabla db_caminata.tbl_estados
 CREATE TABLE IF NOT EXISTS `tbl_estados` (
@@ -327,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `tbl_maletas` (
   `tipoMaleta` int(11) NOT NULL DEFAULT 1,
   `creada` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idMaleta`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- Volcando datos para la tabla db_caminata.tbl_maletas: ~9 rows (aproximadamente)
 INSERT INTO `tbl_maletas` (`idMaleta`, `idEnvio`, `codigoMaleta`, `tipoMaleta`, `creada`) VALUES
@@ -339,8 +336,7 @@ INSERT INTO `tbl_maletas` (`idMaleta`, `idEnvio`, `codigoMaleta`, `tipoMaleta`, 
 	(6, 3, 1744659283, 1, '2025-04-14 19:34:43'),
 	(7, 3, 1744659284, 1, '2025-04-14 19:34:44'),
 	(8, 4, 1744661033, 1, '2025-04-14 20:03:53'),
-	(9, 4, 1744661034, 1, '2025-04-14 20:03:54'),
-	(10, 5, 1745684159, 1, '2025-04-26 16:15:59');
+	(9, 4, 1744661034, 1, '2025-04-14 20:03:54');
 
 -- Volcando estructura para tabla db_caminata.tbl_maleta_ordenes
 CREATE TABLE IF NOT EXISTS `tbl_maleta_ordenes` (
@@ -349,30 +345,22 @@ CREATE TABLE IF NOT EXISTS `tbl_maleta_ordenes` (
   `idMaleta` int(11) NOT NULL,
   `codigoOrdenMaleta` text NOT NULL,
   `strDetalle` text NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1,
   `creadoOrdenMaleta` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idOrdenMaleta`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_maleta_ordenes: ~17 rows (aproximadamente)
-INSERT INTO `tbl_maleta_ordenes` (`idOrdenMaleta`, `idOrden`, `idMaleta`, `codigoOrdenMaleta`, `strDetalle`, `estado`, `creadoOrdenMaleta`) VALUES
-	(6, 7, 1, '1000-1', 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS', 1, '2025-04-04 21:46:33'),
-	(7, 7, 1, '1000-2', 'MEDICINA', 1, '2025-04-04 21:46:37'),
-	(8, 8, 1, '1001', 'JUGUETES ROPA JOYAS', 1, '2025-04-04 21:46:42'),
-	(9, 7, 1, '1000-3', 'ROPA 1LBS', 1, '2025-04-04 21:47:14'),
-	(10, 7, 1, '1000-4', 'CAFE DE EL SALVADOR 2LBS', 1, '2025-04-04 21:47:30'),
-	(11, 7, 2, '1000-5', 'DISPOSITIVOS ELECTRONICOS', 1, '2025-04-04 21:54:12'),
-	(12, 11, 2, '1004', 'ROPA Y JOYAS ', 1, '2025-04-09 21:31:58'),
-	(13, 7, 6, '1000-1', 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS', 1, '2025-04-14 19:35:17'),
-	(14, 7, 6, '1000-3', 'ROPA 1LBS', 1, '2025-04-14 19:36:22'),
-	(15, 8, 8, '1001-1', 'JUGUETES ROPA JOYAS', 1, '2025-04-14 20:04:19'),
-	(16, 14, 10, '1007-1', 'JUGUETES', 1, '2025-04-26 16:16:16'),
-	(17, 14, 10, '1007-2', 'PERFUMES', 0, '2025-04-26 16:16:18'),
-	(18, 14, 10, '1007-3', 'ROPA', 0, '2025-04-26 16:20:54'),
-	(19, 14, 10, '1007-2', 'PERFUMES', 1, '2025-04-26 17:10:48'),
-	(20, 14, 10, '1007-3', 'ROPA', 0, '2025-04-26 17:12:17'),
-	(21, 14, 10, '1007-3', 'ROPA', 0, '2025-04-26 17:12:43'),
-	(22, 14, 10, '1007-3', 'ROPA', 1, '2025-04-26 17:12:51');
+-- Volcando datos para la tabla db_caminata.tbl_maleta_ordenes: ~10 rows (aproximadamente)
+INSERT INTO `tbl_maleta_ordenes` (`idOrdenMaleta`, `idOrden`, `idMaleta`, `codigoOrdenMaleta`, `strDetalle`, `creadoOrdenMaleta`) VALUES
+	(6, 7, 1, '1000-1', 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS', '2025-04-04 21:46:33'),
+	(7, 7, 1, '1000-2', 'MEDICINA', '2025-04-04 21:46:37'),
+	(8, 8, 1, '1001', 'JUGUETES ROPA JOYAS', '2025-04-04 21:46:42'),
+	(9, 7, 1, '1000-3', 'ROPA 1LBS', '2025-04-04 21:47:14'),
+	(10, 7, 1, '1000-4', 'CAFE DE EL SALVADOR 2LBS', '2025-04-04 21:47:30'),
+	(11, 7, 2, '1000-5', 'DISPOSITIVOS ELECTRONICOS', '2025-04-04 21:54:12'),
+	(12, 11, 2, '1004', 'ROPA Y JOYAS ', '2025-04-09 21:31:58'),
+	(13, 7, 6, '1000-1', 'CREMAS CORPORALES, JABONES, LOCIONES 4.5 LBS', '2025-04-14 19:35:17'),
+	(14, 7, 6, '1000-3', 'ROPA 1LBS', '2025-04-14 19:36:22'),
+	(15, 8, 8, '1001-1', 'JUGUETES ROPA JOYAS', '2025-04-14 20:04:19');
 
 -- Volcando estructura para tabla db_caminata.tbl_menu
 CREATE TABLE IF NOT EXISTS `tbl_menu` (
@@ -381,35 +369,19 @@ CREATE TABLE IF NOT EXISTS `tbl_menu` (
   `htmlMenu` text NOT NULL,
   `fechaMenu` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idMenu`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_menu: ~24 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_menu: ~9 rows (aproximadamente)
 INSERT INTO `tbl_menu` (`idMenu`, `nombreMenu`, `htmlMenu`, `fechaMenu`) VALUES
-	(1, 'Pacientes', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#patient" aria-expanded="false"\r\n                        aria-controls="patient">\r\n                        <span><i class="fas fa-user"></i>Pacientes</span>\r\n                    </a>\r\n                    <ul id="patient" class="collapse" aria-labelledby="patient" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Paciente/agregar_pacientes">Agregar paciente</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Paciente/lista_pacientes">Lista pacientes</a> </li>\r\n                    </ul>\r\n                </li>', '2021-04-29 19:00:15'),
-	(2, 'Hoja de cobro', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#hojaCobro" aria-expanded="false"\r\n        aria-controls="hojaCobro">\r\n        <span><i class="fa fa-file"></i>Hoja de cobro</span>\r\n    </a>\r\n    <ul id="hojaCobro" class="collapse" aria-labelledby="hojaCobro" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Hoja/">Agregar Hoja</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Hoja/lista_hojas">Listado de Hojas</a> </li>\r\n        <!--<li> <a href="<?php echo base_url(); ?>Hoja/lista_paquetes">Paquetes</a> </li>-->\r\n        <li> <a href="<?php echo base_url(); ?>Hoja/lista_paquetes">Paquetes</a> \r\n        <li> <a href="<?php echo base_url(); ?>ServiciosExternos/">Servicios Externos</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Proveedor/">Proveedores</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Hoja/historial_hojas">Historial de Hojas</a> </li>\r\n    </ul>\r\n</li>', '2021-04-29 19:00:15'),
-	(3, 'Botiquin', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#botiquin" aria-expanded="false"\r\n                        aria-controls="botiquin">\r\n                        <span><i class="fa fa-thermometer"></i>Botiquin</span>\r\n                    </a>\r\n                    <ul id="botiquin" class="collapse" aria-labelledby="botiquin" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Botiquin/">Medicamentos</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Botiquin/agregar_medicamento">Agregar compra</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Botiquin/historial_compras">Historial compras</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Botiquin/kardex">Movimientos</a> </li>\r\n                    </ul>\r\n                </li>', '2021-04-29 19:00:43'),
-	(4, 'Cotización', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#cotizacion" aria-expanded="false"\r\n                        aria-controls="cotizacion">\r\n                        <span><i class="fa fa-file"></i>Cotización</span>\r\n                    </a>\r\n                    <ul id="cotizacion" class="collapse" aria-labelledby="cotizacion" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Hoja/presupuesto">Crear cotización</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Hoja/lista_presupuestos">Listado de cotizaciones</a> </li>\r\n                    </ul>\r\n                </li>', '2021-04-29 21:20:37'),
-	(5, 'Gastos', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#gastos" aria-expanded="false"\r\n                        aria-controls="gastos">\r\n                        <span><i class="fa fa-tasks"></i>Gastos</span>\r\n                    </a>\r\n                    <ul id="gastos" class="collapse" aria-labelledby="gastos" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Gastos/">Cuentas</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Gastos/control_gastos">Control de gastos</a> </li>\r\n                    </ul>\r\n                </li>', '2021-04-30 17:20:44'),
-	(6, 'Médicos', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#doctor" aria-expanded="false"\r\n                        aria-controls="doctor">\r\n                        <span><i class="fas fa-stethoscope"></i>Médico</span>\r\n                    </a>\r\n                    <ul id="doctor" class="collapse" aria-labelledby="doctor" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Medico/">Lista médicos</a> </li>\r\n                    </ul>\r\n                </li>', '2021-04-30 17:20:44'),
-	(7, 'Empleados', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#empleados" aria-expanded="false"\r\n                        aria-controls="empleados">\r\n                        <span><i class="fas fa-users"></i>Empleados</span>\r\n                    </a>\r\n                    <ul id="empleados" class="collapse" aria-labelledby="empleados" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Empleado/">Agregar empleado</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Empleado/lista_empleados">Lista empleados</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Empleado/vacaciones_empleados">Cumpleañeros</a> </li>\r\n                        <li> <a href="<?php echo base_url(); ?>Empleado/cargos_empleados">Cargos</a> </li>\r\n                    </ul>\r\n                </li>', '2021-04-30 17:20:44'),
-	(8, 'Habitaciones', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#habitacion" aria-expanded="false"\r\n        aria-controls="habitacion">\r\n        <span><i class="fas fa-hospital"></i>Habitaciones</span>\r\n    </a>\r\n    <ul id="habitacion" class="collapse" aria-labelledby="habitacion" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Paciente/esquema_habitaciones">Esquema de habitaciones</a></li>\r\n        <li> <a href="<?php echo base_url(); ?>Paciente/senso_diario">Censo diario</a></li>\r\n    </ul>\r\n</li>', '2021-04-30 17:20:44'),
-	(9, 'Reportes', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#reportes" aria-expanded="false"\r\n        aria-controls="reportes">\r\n        <span><i class="fas fa-file-invoice-dollar"></i>Reportes</span>\r\n    </a>\r\n    <ul id="reportes" class="collapse" aria-labelledby="reportes" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/liquidacion_caja">Liquidación de caja</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/cobros_pacientes">Cobros a pacientes</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/externos_hoja">Externos por hoja</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/usg_rx">USG y RX</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/rx_laboratorio">RX y Laboratorio</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/ingresos_costos_gastos">Ingresos, Costos, Gastos</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/detalle_gastos">Detalle gastos</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/detalle_facturas">Facturas</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/salidas_botiquin">Salidas de botiquín</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/detalle_medicamento">Detalle medicamento</a> </li>\r\n    </ul>\r\n</li>', '2021-04-30 17:20:44'),
-	(10, 'Configuraciòn', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#configuracion"\r\n                        aria-expanded="false" aria-controls="configuracion">\r\n                        <span><i class="fa fa-cog"></i>Configuración</span>\r\n                    </a>\r\n                    <ul id="configuracion" class="collapse" aria-labelledby="configuracion"\r\n                        data-parent="#side-nav-accordion">\r\n                        <li><a href="<?php echo base_url(); ?>Accesos/">Accesos</a></li>\r\n                        <li><a href="<?php echo base_url(); ?>Usuarios/gestion_usuarios">Usuarios</a></li>\r\n                        <li><a href="<?php echo base_url(); ?>Permisos/">Permisos</a></li>\r\n	     <li><a href="<?php echo base_url(); ?>Herramientas/movimientos_hojas">Movimientos hoja</a></li>\r\n                    </ul>\r\n                </li>', '2021-04-30 17:20:44'),
-	(11, 'Cuentas por pagar', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#pagar" aria-expanded="false" aria-controls="pagar">\r\n        <span><i class="fas fa-clipboard-list"></i>Cuentas por pagar</span>\r\n    </a>\r\n    <ul id="pagar" class="collapse" aria-labelledby="pagar" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>CuentasPendientes/cuentas_por_pagar">Gestión cuentas</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>CuentasPendientes/cuentas_por_proveedor">Cuentas por proveedor</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>CuentasPendientes/cuentas_por_fecha">Cuentas por fecha</a> </li>\r\n    </ul>\r\n</li>', '2021-05-18 16:29:04'),
-	(12, 'Stock Medicamentos', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#stock" aria-expanded="false"\r\n        aria-controls="stock">\r\n        <span><i class="fas fa-clipboard-list"></i>Stock Medicamentos</span>\r\n    </a>\r\n    <ul id="stock" class="collapse" aria-labelledby="stock" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Botiquin/stock_medicamentos">Actualizar Stock</a> </li>\r\n    </ul>\r\n</li>', '2021-06-30 13:54:18'),
-	(13, 'Laboratorio', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#laboratorio" aria-expanded="false"aria-controls="laboratorio">\r\n        <span><i class="fas fa-flask"></i>Laboratorio</span>\r\n    </a>\r\n    <ul id="laboratorio" class="collapse" aria-labelledby="laboratorio" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Laboratorio/agregar_examen">Agregar examen</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Laboratorio/examenes_realizados">Examenes realizados</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Laboratorio/historial_examenes">Historial examenes</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Laboratorio/resumen_examenes">Resumen examenes</a> </li>\r\n    </ul>\r\n</li>', '2021-09-25 14:27:48'),
-	(14, 'Honorarios', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#honorarios" aria-expanded="false"aria-controls="honorarios">\r\n        <span><i class="fa fa-money-bill"></i>Honorarios</span>\r\n    </a>\r\n    <ul id="honorarios" class="collapse" aria-labelledby="laboratorio" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Honorarios/gestion_honorarios">Gestion de honorarios</a> </li>\r\n    </ul>\r\n</li>', '2021-11-23 22:07:16'),
-	(15, 'Reporte', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#reporte" aria-expanded="false"\r\n        aria-controls="reporte">\r\n        <span><i class="fas fa-file-invoice-dollar"></i>Reporte</span>\r\n    </a>\r\n    <ul id="reporte" class="collapse" aria-labelledby="reporte" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Reportes/externos_hoja">Externos por hoja</a> </li>\r\n    </ul>\r\n</li>', '2021-12-04 14:19:05'),
-	(16, 'Facturación', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#anuncio" aria-expanded="false"aria-controls="anuncio">\r\n        <span><i class="fas fa-newspaper"></i>Facturación</span>\r\n    </a>\r\n    <ul id="anuncio" class="collapse" aria-labelledby="laboratorio" data-parent="#side-nav-accordion">\r\n        <!-- <li> <a href="<?php echo base_url(); ?>Herramientas/agregar_anuncio">Gestion de anuncios</a> </li> -->\r\n        <!-- <li> <a href="<?php echo base_url(); ?>Herramientas/factura_isbm">Factura ISBM</a> </li> -->\r\n        <li> <a href="<?php echo base_url(); ?>Herramientas/facturacion">Facturación</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Herramientas/resumen_diario">Resumen diario</a> </li>\r\n    </ul>\r\n</li>', '2021-12-17 14:25:07'),
-	(17, 'Consultas ISBM', '<li class="menu-item">\r\n                    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#botiquin" aria-expanded="false"\r\n                        aria-controls="botiquin">\r\n                        <span><i class="fa fa-thermometer"></i>Botiquin</span>\r\n                    </a>\r\n                    <ul id="botiquin" class="collapse" aria-labelledby="botiquin" data-parent="#side-nav-accordion">\r\n                        <li> <a href="<?php echo base_url(); ?>Botiquin/">Medicamentos</a> </li>\r\n                    </ul>\r\n                </li>', '2022-01-10 14:51:51'),
-	(18, 'Precio medicamentos', '<li class="menu-item">\r\n    <a href="<?php echo base_url(); ?>Botiquin/precios_medicamentos/">\r\n    <span><i class="fas fa-list"></i>Precio medicamentos</span>\r\n    </a>\r\n</li>', '2022-02-14 14:02:15'),
-	(19, 'Hemodialisis', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#hemodialisis" aria-expanded="false" aria-controls="hemodialisis">\r\n        <span><i class="fa fa-tasks"></i>Hemodiálisis </span>\r\n    </a>\r\n    <ul id="hemodialisis" class="collapse" aria-labelledby="hemodialisis" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Hemodialisis/agregar_paciente/">Agregar paciente</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Hemodialisis/agregar_cita/">Agregar cita</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Hemodialisis/lista_citas/">Lista citas</a> </li>\r\n    </ul>\r\n</li>', '2022-02-21 13:36:48'),
-	(20, 'ISBM, Hemo, Empleados', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#isbm" aria-expanded="false" aria-controls="isbm">\r\n        <span><i class="fa fa-tablets"></i>ISBM, Hemo, Empleados</span>\r\n    </a>\r\n    <ul id="isbm" class="collapse" aria-labelledby="isbm" data-parent="#side-nav-accordion">\r\n        <!--<li> <a href="<?php echo base_url(); ?>Isbm/cuentas_isbm/">Crear Requisición</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Isbm/cuentas_isbm/">Lista requisiciones</a> </li>-->\r\n        <li> <a href="<?php echo base_url(); ?>Isbm/cuenta_descargo/">Crear cuenta para descargos</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Isbm/lista_cuenta_descargos/">Lista cuenta descargos</a> </li>\r\n    </ul>\r\n</li>', '2022-04-26 20:39:22'),
-	(21, 'Insumos laboratorio', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#insumosLab" aria-expanded="false" aria-controls="insumosLab">\r\n        <span><i class="fa fa-vials"></i>Insumos laboratorio</span>\r\n    </a>\r\n    <ul id="insumosLab" class="collapse" aria-labelledby="insumosLab" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>InsumosLab/agregar_compra/">Agregar compra</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>InsumosLab/lista_compras/">Lista compras</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>InsumosLab/lista_insumos/">Lista insumos</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>InsumosLab/gestion_insumos/">Salidas</a> </li>\r\n       <li> <a href="<?php echo base_url(); ?>InsumosLab/donantes/">Donantes</a> </li>\r\n       <li> <a href="<?php echo base_url(); ?>InsumosLab/lista_donantes/">Lista donantes</a> </li>\r\n    </ul>\r\n</li>', '2022-07-13 12:49:45'),
-	(22, 'Insumos limpieza', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#insumosLimpieza" aria-expanded="false" aria-controls="insumosLimpieza">\r\n        <span><i class="fa fa-list"></i>Insumos limpieza</span>\r\n    </a>\r\n    <ul id="insumosLimpieza" class="collapse" aria-labelledby="insumosLimpieza" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Limpieza/agregar_compra/">Agregar compra</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Limpieza/lista_compras/">Lista compras</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Limpieza/descargos_insumos/">Salidas</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Limpieza/">Gestión insumos</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Limpieza/seguimiento_insumos/">Seguimiento insumos</a> </li>\r\n    </ul>\r\n</li>', '2022-08-30 14:56:51'),
-	(23, 'Insumos Hemodialisis', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#insumosHemodialisis" aria-expanded="false" aria-controls="insumosHemodialisis">\r\n        <span><i class="fa fa-notes-medical"></i>Insumos Hemodialisis</span>\r\n    </a>\r\n    <ul id="insumosHemodialisis" class="collapse" aria-labelledby="insumosHemodialisis" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>InsumosHemo/agregar_compra/">Agregar compra</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>InsumosHemo/lista_compras/">Lista compras</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>InsumosHemo/descargos_insumos/">Salidas</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>InsumosHemo/">Gestión insumos</a> </li>\r\n    </ul>\r\n</li>', '2022-09-26 13:54:22'),
-	(24, 'Planilla', '<li class="menu-item">\r\n    <a href="#" class="has-chevron" data-toggle="collapse" data-target="#planilla" aria-expanded="false" aria-controls="planilla">\r\n        <span><i class="fa fa-users"></i>Planilla</span>\r\n    </a>\r\n    <ul id="planilla" class="collapse" aria-labelledby="planilla" data-parent="#side-nav-accordion">\r\n        <li> <a href="<?php echo base_url(); ?>Planilla/">Crear planilla</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Planilla/historial_planillas/">Historial planilla</a> </li>\r\n        <li> <a href="<?php echo base_url(); ?>Planilla/personal_planilla/">Personal planilla</a> </li>\r\n</li>', '2023-02-27 14:35:08'),
-	(25, 'Entregas', '', '2025-04-28 21:22:19');
+	(1, 'Clientes', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-user-check"></i><span\r\n        class="side-menu__label">Clientes</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li><a href="<?php echo base_url(); ?>Clientes/" class="slide-item">Lista de clientes</a></li>\r\n        <li><a href="<?php echo base_url(); ?>Clientes/agregar_cliente/" class="slide-item">Agregar cliente</a></li>\r\n     </ul>\r\n</li>', '2025-05-24 23:25:46'),
+	(2, 'Ordenes', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span\r\n        class="side-menu__label">Ordenes</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li><a href="<?php echo base_url(); ?>Ordenes/agregar_orden" class="slide-item">Nueva orden</a></li>\r\n        <li><a href="<?php echo base_url(); ?>Ordenes/" class="slide-item">Lista de ordenes</a></li>\r\n     </ul>\r\n</li>', '2025-05-24 23:26:07'),
+	(3, 'Envios', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file-plus"></i><span\r\n        class="side-menu__label">Envios</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li><a href="<?php echo base_url(); ?>Envios/" class="slide-item">Crear envio</a></li>\r\n        <li><a href="<?php echo base_url(); ?>Envios/lista_envios" class="slide-item">Lista de envios</a></li>\r\n     </ul>\r\n</li>', '2025-05-24 23:26:30'),
+	(4, 'Entregas', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file-plus"></i><span\r\n        class="side-menu__label">Entrega de paquetes</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li><a href="<?php echo base_url(); ?>Entregas/" class="slide-item">Entregas</a></li>\r\n        <li><a href="<?php echo base_url(); ?>Entregas/paquetes_entregados" class="slide-item">Paquetes entregados</a></li>\r\n     </ul>\r\n</li>', '2025-05-24 23:26:50'),
+	(5, 'Empleados', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-users"></i><span\r\n        class="side-menu__label">Empleados</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/">Agregar empleado</a> </li>\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/lista_empleados">Lista empleados</a> </li>\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Empleado/cargos_empleados">Cargos</a> </li>\r\n     </ul>\r\n</li>', '2025-05-24 23:27:03'),
+	(6, 'Gastos', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span\r\n        class="side-menu__label">Gastos</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Gastos/">Cuentas</a> </li>\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Gastos/control_gastos">Control de gastos</a> </li>\r\n     </ul>\r\n</li>', '2025-05-24 23:27:49'),
+	(7, 'Reportes', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fe fe-file"></i><span\r\n        class="side-menu__label">Reportes</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/lista_clientes">Clientes</a> </li>\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/ordenes_por_fecha">Ordenes por fecha</a> </li>\r\n        <li class="slide-item"> <a href="<?php echo base_url(); ?>Reportes/ordenes_por_ruta">Ordenes por rutas</a> </li>\r\n     </ul>\r\n</li>', '2025-05-24 23:28:12'),
+	(8, 'Configuración', '<li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fa fa-cog"></i><span\r\n        class="side-menu__label">Configuración</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li class="slide-item"><a href="<?php echo base_url(); ?>Accesos/">Accesos</a></li>\r\n        <li class="slide-item"><a href="<?php echo base_url(); ?>Usuarios/gestion_usuarios">Usuarios</a></li>\r\n        <li class="slide-item"><a href="<?php echo base_url(); ?>Permisos/">Permisos</a></li>\r\n             <li class="slide-item"><a href="<?php echo base_url(); ?>Herramientas/movimientos_hojas">Movimientos hoja</a></li>\r\n     </ul>\r\n</li>', '2025-05-24 23:28:38'),
+	(9, 'Empresa', ' <li class="slide">\r\n     <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i  class="side-menu__icon fa fa-building-o"></i><span\r\n        class="side-menu__label">Empresa</span><i class="angle fe fe-chevron-right"></i></a>\r\n     <ul class="slide-menu">\r\n        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>\r\n        <li class="slide-item"><a href="<?php echo base_url(); ?>Empresa/">Información</a></li>\r\n     </ul>\r\n </li>', '2025-05-24 23:29:24');
 
 -- Volcando estructura para tabla db_caminata.tbl_municipios_condados
 CREATE TABLE IF NOT EXISTS `tbl_municipios_condados` (
@@ -709,20 +681,21 @@ CREATE TABLE IF NOT EXISTS `tbl_ordenes` (
   `creoQR` int(11) NOT NULL DEFAULT 0,
   `gestorOrden` int(11) NOT NULL,
   `empacadaPor` text NOT NULL,
+  `entregadaPor` text NOT NULL,
   `creadaOrden` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idOrden`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- Volcando datos para la tabla db_caminata.tbl_ordenes: ~7 rows (aproximadamente)
-INSERT INTO `tbl_ordenes` (`idOrden`, `codigoOrden`, `fechaEnvio`, `fechaLlegada`, `emisorOrden`, `receptorOrden`, `tipoPago`, `estadoPago`, `tipoServicio`, `abonoOrden`, `otraDireccionOrden`, `destinoOrden`, `observacionesOrden`, `estadoOrden`, `creoQR`, `gestorOrden`, `empacadaPor`, `creadaOrden`) VALUES
-	(7, 1000, '2025-04-01', '2025-04-05', 2, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 3, 'N/A', 4, 0, 0, '', '2025-03-27 17:38:22'),
-	(8, 1001, '2025-03-31', '2025-03-31', 9, 1, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '', '2025-03-31 20:53:46'),
-	(9, 1002, '2025-04-03', '2025-04-03', 1, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '', '2025-04-03 20:12:22'),
-	(10, 1003, '2025-04-05', '2025-04-15', 1, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 5, 'Tratar con cuidado', 1, 0, 0, '', '2025-04-03 20:17:36'),
-	(11, 1004, '2025-04-09', '2025-04-09', 1, 8, 'Efectivo', 'Por pagar', 'Entrega', 15.00, '', 6, 'Ninguna', 1, 0, 0, '', '2025-04-09 21:22:31'),
-	(12, 1005, '2025-04-17', '2025-04-17', 1, 3, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 2, 'N/A', 1, 0, 0, '', '2025-04-17 19:42:11'),
-	(13, 1006, '2025-04-17', '2025-04-17', 4, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, '', 1, 0, 0, 'Edwin Cortez', '2025-04-17 19:48:10'),
-	(14, 1007, '2025-04-26', '2025-04-26', 4, 11, 'Efectivo', 'Por pagar', 'Entrega', 25.00, '', 1, 'Tratar con cuidado', 4, 0, 0, 'Edwin Cortez', '2025-04-26 16:05:48');
+INSERT INTO `tbl_ordenes` (`idOrden`, `codigoOrden`, `fechaEnvio`, `fechaLlegada`, `emisorOrden`, `receptorOrden`, `tipoPago`, `estadoPago`, `tipoServicio`, `abonoOrden`, `otraDireccionOrden`, `destinoOrden`, `observacionesOrden`, `estadoOrden`, `creoQR`, `gestorOrden`, `empacadaPor`, `entregadaPor`, `creadaOrden`) VALUES
+	(7, 1000, '2025-04-01', '2025-04-05', 2, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 3, 'N/A', 4, 0, 0, '', '', '2025-03-27 17:38:22'),
+	(8, 1001, '2025-03-31', '2025-03-31', 9, 1, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '', '', '2025-03-31 20:53:46'),
+	(9, 1002, '2025-04-03', '2025-04-03', 1, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, 'N/A', 1, 0, 0, '', '', '2025-04-03 20:12:22'),
+	(10, 1003, '2025-04-05', '2025-04-15', 1, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 5, 'Tratar con cuidado', 1, 0, 0, '', '', '2025-04-03 20:17:36'),
+	(11, 1004, '2025-04-09', '2025-04-09', 1, 8, 'Efectivo', 'Por pagar', 'Entrega', 15.00, '', 6, 'Ninguna', 1, 0, 0, '', '', '2025-04-09 21:22:31'),
+	(12, 1005, '2025-04-17', '2025-04-17', 1, 3, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 2, 'N/A', 4, 0, 0, '', '2025-05-24 04:47:45 PM', '2025-04-17 19:42:11'),
+	(13, 1006, '2025-04-17', '2025-04-17', 4, 7, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 1, '', 4, 0, 0, 'Edwin Cortez', '2025-05-24 04:29:26 PM', '2025-04-17 19:48:10'),
+	(14, 1007, '2025-05-24', '2025-05-24', 11, 9, 'Efectivo', 'Pagado', 'Entrega', 0.00, '', 8, 'Llevar con cuidado', 4, 0, 0, 'Edwin Cortez', '', '2025-05-24 22:11:42');
 
 -- Volcando estructura para tabla db_caminata.tbl_orden_qr
 CREATE TABLE IF NOT EXISTS `tbl_orden_qr` (
@@ -762,119 +735,19 @@ CREATE TABLE IF NOT EXISTS `tbl_permisos` (
   `estadoPermiso` int(11) NOT NULL,
   `fechaPermiso` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idPermiso`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_permisos: ~109 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_permisos: ~9 rows (aproximadamente)
 INSERT INTO `tbl_permisos` (`idPermiso`, `idMenu`, `idAcceso`, `estadoPermiso`, `fechaPermiso`) VALUES
-	(1, 1, 1, 1, '2021-04-29 19:41:05'),
-	(2, 3, 1, 1, '2021-04-29 19:41:05'),
-	(3, 2, 1, 1, '2021-04-29 21:13:09'),
-	(4, 4, 1, 1, '2021-04-30 18:48:46'),
-	(5, 5, 1, 1, '2021-04-30 18:48:46'),
-	(6, 6, 1, 1, '2021-04-30 18:48:46'),
-	(7, 7, 1, 1, '2021-04-30 18:48:46'),
-	(8, 8, 1, 1, '2021-04-30 18:48:47'),
-	(9, 9, 1, 1, '2021-04-30 18:48:47'),
-	(10, 10, 1, 1, '2021-04-30 18:48:47'),
-	(11, 3, 3, 1, '2021-05-03 17:17:51'),
-	(12, 2, 3, 1, '2021-05-03 18:31:34'),
-	(13, 1, 3, 1, '2021-05-03 18:41:32'),
-	(14, 11, 1, 1, '2021-05-18 16:29:19'),
-	(15, 1, 4, 1, '2021-06-15 15:40:40'),
-	(16, 2, 4, 1, '2021-06-15 15:40:40'),
-	(17, 3, 4, 1, '2021-06-15 15:40:40'),
-	(18, 4, 4, 1, '2021-06-15 15:40:40'),
-	(19, 5, 4, 1, '2021-06-15 15:40:40'),
-	(20, 8, 4, 1, '2021-06-15 15:40:40'),
-	(21, 4, 3, 1, '2021-06-15 15:43:17'),
-	(22, 2, 2, 1, '2021-06-24 16:25:36'),
-	(23, 4, 2, 1, '2021-06-24 16:25:36'),
-	(24, 6, 2, 1, '2021-06-24 16:25:56'),
-	(25, 6, 4, 1, '2021-06-24 16:39:55'),
-	(26, 6, 3, 1, '2021-06-24 16:41:25'),
-	(27, 2, 5, 1, '2021-06-29 13:00:56'),
-	(28, 5, 5, 1, '2021-06-29 13:00:56'),
-	(29, 9, 5, 1, '2021-06-29 13:00:56'),
-	(30, 11, 5, 1, '2021-06-29 13:00:56'),
-	(31, 1, 2, 1, '2021-06-29 13:15:02'),
-	(32, 12, 1, 1, '2021-06-30 13:55:15'),
-	(33, 1, 7, 1, '2021-07-01 12:17:54'),
-	(34, 2, 7, 1, '2021-07-01 12:17:54'),
-	(35, 9, 4, 1, '2021-07-01 14:01:07'),
-	(36, 1, 5, 1, '2021-07-02 19:40:22'),
-	(37, 6, 5, 1, '2021-07-02 19:40:22'),
-	(38, 12, 3, 1, '2021-07-05 13:13:27'),
-	(39, 1, 9, 1, '2021-07-16 15:37:23'),
-	(40, 2, 9, 1, '2021-07-16 15:37:23'),
-	(41, 3, 9, 1, '2021-07-16 15:37:24'),
-	(42, 4, 9, 1, '2021-07-16 15:37:24'),
-	(43, 5, 9, 1, '2021-07-16 15:37:24'),
-	(44, 6, 9, 1, '2021-07-16 15:37:24'),
-	(45, 7, 9, 1, '2021-07-16 15:37:24'),
-	(46, 8, 9, 1, '2021-07-16 15:37:24'),
-	(47, 9, 9, 1, '2021-07-16 15:37:24'),
-	(48, 13, 1, 1, '2021-09-25 15:32:19'),
-	(49, 13, 7, 1, '2021-09-27 13:38:40'),
-	(50, 1, 8, 1, '2021-10-23 16:50:40'),
-	(51, 2, 8, 1, '2021-10-23 16:50:40'),
-	(52, 4, 8, 1, '2021-10-23 16:50:40'),
-	(53, 6, 8, 1, '2021-10-23 16:50:40'),
-	(54, 14, 1, 1, '2021-11-23 22:08:18'),
-	(55, 14, 5, 1, '2021-11-24 13:14:23'),
-	(56, 14, 4, 1, '2021-11-26 15:45:12'),
-	(57, 1, 10, 1, '2021-12-04 14:30:21'),
-	(58, 2, 10, 1, '2021-12-04 14:30:22'),
-	(59, 4, 10, 1, '2021-12-04 14:30:22'),
-	(60, 15, 10, 1, '2021-12-04 14:30:22'),
-	(61, 6, 10, 1, '2021-12-04 14:31:34'),
-	(62, 15, 2, 0, '2021-12-13 17:19:15'),
-	(63, 16, 1, 1, '2021-12-17 14:25:16'),
-	(64, 16, 10, 1, '2021-12-17 16:17:48'),
-	(65, 16, 2, 1, '2021-12-17 21:34:02'),
-	(66, 16, 9, 1, '2021-12-20 14:17:01'),
-	(67, 14, 10, 1, '2021-12-30 15:52:38'),
-	(68, 1, 11, 1, '2022-01-07 20:56:19'),
-	(69, 2, 11, 1, '2022-01-07 20:56:19'),
-	(70, 3, 11, 1, '2022-01-07 20:56:19'),
-	(71, 4, 11, 1, '2022-01-07 20:56:19'),
-	(72, 6, 11, 1, '2022-01-07 20:56:19'),
-	(73, 17, 12, 1, '2022-01-10 14:52:07'),
-	(74, 16, 5, 1, '2022-01-24 15:42:19'),
-	(75, 1, 13, 1, '2022-02-01 13:58:12'),
-	(76, 2, 13, 1, '2022-02-01 13:58:12'),
-	(77, 6, 13, 1, '2022-02-01 13:58:13'),
-	(78, 18, 1, 1, '2022-02-14 14:02:59'),
-	(79, 18, 11, 0, '2022-02-14 14:04:01'),
-	(80, 18, 3, 1, '2022-02-14 14:04:35'),
-	(81, 18, 8, 1, '2022-02-14 14:04:49'),
-	(82, 18, 4, 1, '2022-02-14 14:05:01'),
-	(83, 18, 2, 1, '2022-02-14 14:05:14'),
-	(84, 18, 10, 1, '2022-02-14 14:05:30'),
-	(85, 12, 11, 0, '2022-02-16 14:53:27'),
-	(86, 19, 13, 1, '2022-02-21 13:37:59'),
-	(87, 19, 1, 1, '2022-02-21 13:40:14'),
-	(88, 8, 11, 1, '2022-02-24 17:47:25'),
-	(89, 3, 5, 1, '2022-04-26 20:21:38'),
-	(90, 20, 3, 1, '2022-04-26 20:40:15'),
-	(91, 20, 1, 1, '2022-04-26 20:40:35'),
-	(92, 20, 11, 1, '2022-04-27 14:22:43'),
-	(93, 21, 7, 1, '2022-07-13 12:50:06'),
-	(94, 21, 1, 1, '2022-07-16 13:10:25'),
-	(95, 18, 15, 1, '2022-08-01 14:09:44'),
-	(96, 22, 1, 1, '2022-08-30 15:08:15'),
-	(97, 23, 5, 1, '2022-09-26 13:54:31'),
-	(98, 23, 1, 1, '2022-09-26 13:57:32'),
-	(99, 18, 13, 1, '2022-10-20 14:31:45'),
-	(100, 21, 16, 1, '2023-02-02 14:17:38'),
-	(101, 22, 16, 1, '2023-02-02 14:17:38'),
-	(102, 23, 16, 1, '2023-02-02 14:17:39'),
-	(103, 24, 1, 1, '2023-02-27 14:35:19'),
-	(104, 24, 4, 1, '2023-02-27 14:40:04'),
-	(105, 15, 1, 1, '2023-04-08 23:37:11'),
-	(106, 17, 1, 1, '2023-04-08 23:38:18'),
-	(107, 1, 19, 1, '2023-04-08 23:47:11'),
-	(108, 2, 19, 1, '2023-04-08 23:47:11'),
-	(109, 3, 19, 1, '2023-04-08 23:47:11');
+	(1, 1, 1, 1, '2025-05-24 23:32:46'),
+	(2, 2, 1, 1, '2025-05-24 23:32:46'),
+	(3, 3, 1, 1, '2025-05-24 23:32:46'),
+	(4, 4, 1, 1, '2025-05-24 23:32:46'),
+	(5, 5, 1, 1, '2025-05-24 23:32:46'),
+	(6, 6, 1, 1, '2025-05-24 23:32:46'),
+	(7, 7, 1, 1, '2025-05-24 23:32:46'),
+	(8, 8, 1, 1, '2025-05-24 23:32:46'),
+	(9, 9, 1, 1, '2025-05-24 23:32:46');
 
 -- Volcando estructura para tabla db_caminata.tbl_receptores
 CREATE TABLE IF NOT EXISTS `tbl_receptores` (
@@ -909,7 +782,7 @@ INSERT INTO `tbl_receptores` (`idCliente`, `codigoCliente`, `nombreCliente`, `do
 	(8, 1007, 'Marcos Antonio-Maldonado', '987456321', '23659874', 'example@example.com', 1, 12, 'Colonia La Pradera', '', '1-El Salvador', '12-San Miguel', '', 8, 1, '2025-03-26 22:08:06'),
 	(9, 1008, 'Felipe Alonso-Campos', '456321', '6398-5698', 'example@example.com', 2, 57, '1200  HOLLY HILL DR GRAND PRAIRIE', '264', '2- Estados Unidos', '57- Texas ', '264-Irving', 9, 1, '2025-03-27 14:43:05'),
 	(10, 1009, 'Juan Adalberto-Valdez Parada', '963265987', '7546-8956', '-', 1, 11, 'Barrio la parroquia', '51', '1-El Salvador', '11-Usulután', '51-Jucuarán', 10, 1, '2025-04-08 17:20:18'),
-	(11, 1010, 'Marcos Alonso-Batres Campos', '04578965-1', '7352-6398', '-', 1, 11, 'Barrio el Centro', '43', '1-El Salvador', '11-Usulután', '43-Berlín', 11, 1, '2025-04-26 16:04:59');
+	(11, 1010, 'Juan Carlos-Canales Carranza', '09874571-2', '2635-5698', '-', 1, 11, 'Barrio La Parroquia, Casa #15', '64', '1-El Salvador', '11-Usulután', '64-Usulután', 11, 1, '2025-05-24 22:10:32');
 
 -- Volcando estructura para tabla db_caminata.tbl_usuarios
 CREATE TABLE IF NOT EXISTS `tbl_usuarios` (
@@ -924,12 +797,11 @@ CREATE TABLE IF NOT EXISTS `tbl_usuarios` (
   `nivelUsuario` int(11) NOT NULL DEFAULT 0,
   `fechaUsuario` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_caminata.tbl_usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_caminata.tbl_usuarios: ~1 rows (aproximadamente)
 INSERT INTO `tbl_usuarios` (`idUsuario`, `nombreUsuario`, `psUsuario`, `idEmpleado`, `idAcceso`, `estadoUsuario`, `codigoVerificacion`, `pivoteUsuario`, `nivelUsuario`, `fechaUsuario`) VALUES
-	(1, 'Informatica', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, 1, '', 0, 0, '2025-04-11 17:29:13'),
-	(2, 'Carla Parada', 'e10adc3949ba59abbe56e057f20f883e', 3, 2, 1, '', 0, 0, '2025-04-28 19:49:25');
+	(1, 'Informatica', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, 1, '', 0, 0, '2025-04-11 17:29:13');
 
 -- Volcando estructura para disparador db_caminata.tbl_emisores_after_delete
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
@@ -937,17 +809,6 @@ DELIMITER //
 CREATE TRIGGER `tbl_emisores_after_delete` AFTER DELETE ON `tbl_emisores` FOR EACH ROW BEGIN
 	UPDATE tbl_receptores AS r SET r.estadoCliente = '0'
 	WHERE r.pivoteEmisor = OLD.idCliente;
-END//
-DELIMITER ;
-SET SQL_MODE=@OLDTMP_SQL_MODE;
-
--- Volcando estructura para disparador db_caminata.tbl_maleta_ordenes_after_insert
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
-DELIMITER //
-CREATE TRIGGER `tbl_maleta_ordenes_after_insert` AFTER INSERT ON `tbl_maleta_ordenes` FOR EACH ROW BEGIN
-	-- Actualizar el estado de la orden
-	UPDATE tbl_ordenes AS o SET  o.estadoOrden = 2
-	WHERE o.idOrden = NEW.idOrden;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
